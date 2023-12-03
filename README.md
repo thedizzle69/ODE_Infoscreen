@@ -1,2 +1,2 @@
 # ODE_Infoscreen
-Java Infoscreen by Omeroic, Bißmann, Singh
+Java Infoscreen by Omerovic, Bißmann, Singh
