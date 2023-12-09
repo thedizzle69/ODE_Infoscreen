@@ -125,6 +125,15 @@
                             <mainClass>server.ServerApp</mainClass>
                         </configuration>
                     </execution>
+
+                    <!-- Add a new execution for testing -->
+                    <execution>
+                        <id>test-jfx</id>
+                        <configuration>
+                            <mainClass>org.junit.platform.console.ConsoleLauncher</mainClass>
+                        </configuration>
+                    </execution>
+
                 </executions>
             </plugin>
         </plugins>
