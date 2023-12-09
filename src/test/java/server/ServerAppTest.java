@@ -1,6 +1,6 @@
 package server;
 
-import javafx.embed.swing.JFXPanel;
+import javafx.application.Platform;
 import org.junit.jupiter.api.Test;
 
 public class ServerAppTest {
@@ -8,9 +8,12 @@ public class ServerAppTest {
     @Test
     public void testStart() {
         // Initialize JavaFX Toolkit
-        new JFXPanel();
+        Platform.startup(() -> {
+            // Run your JavaFX application logic here
+            // Note: This test only checks if the start method can be invoked without errors.
+        });
 
-        // Run your JavaFX application logic here
-        // Note: This test only checks if the start method can be invoked without errors.
+        // Clean up JavaFX Toolkit
+        Platform.exit();
     }
 }
