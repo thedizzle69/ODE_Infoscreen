@@ -20,21 +20,44 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    # Add a step to list directory contents
-    - name: List directory contents
-      run: ls -R
+      # Add a step to list directory contents
+      - name: List directory contents
+        run: ls -R
 
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: maven
-    - name: Build with Maven
-      run: mvn -B package -e -X
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      - name: Build with Maven
+        run: mvn -B package -e -X
+
+      - name: Print Surefire Reports
+        run: cat /home/runner/work/ODE_Infoscreen/ODE_Infoscreen/target/surefire-reports/*
+
+
+        # Displaytests
+
+      - name: Install Xvfb
+        run: sudo apt-get install xvfb
+
+      - name: Set up Xvfb
+        run: Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+
+      - name: Set DISPLAY variable
+        run: export DISPLAY=:99
+
+      - name: Build with Maven
+        run: mvn -B package -e -X
+
+      - name: Print Surefire Reports
+        run: cat /home/runner/work/ODE_Infoscreen/ODE_Infoscreen/target/surefire-reports/*
+
+
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     # - name: Update dependency graph
