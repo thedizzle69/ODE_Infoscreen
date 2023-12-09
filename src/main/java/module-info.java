@@ -6,7 +6,7 @@ module InfoScreen{
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
-    //requires javafx.swing;
+    requires javafx.swing;
     //requires com.github.almasb.fxgl;
 
     // Add other module declarations if needed
