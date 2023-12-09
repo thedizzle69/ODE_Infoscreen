@@ -25,6 +25,13 @@
     <dependencies>
         <!-- Other dependencies -->
 
+        <!-- JavaFX Web -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>17.0.6</version>
+        </dependency>
+
          <!-- JavaFX -->
         <dependency>
             <groupId>org.openjfx</groupId>
