@@ -1,12 +1,10 @@
 package client;
 
-import javafx.event.ActionEvent;
-import javafx.scene.layout.BorderPane;
 import resources.ContentType;
 
+import javafx.event.ActionEvent;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
-// import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,11 +16,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 public class GUIController {
-    public BorderPane root;
-    public Button clearButton;
-    public Button saveButton;
-    public Button loadButton;
-    public Button exitButton;
     @FXML
     private TextArea contentTextArea;
 
@@ -34,10 +27,6 @@ public class GUIController {
 
     @FXML
     private Button uploadImageButton;
-
-    public GUIController(TextArea contentTextArea) {
-        this.contentTextArea = contentTextArea;
-    }
 
     @FXML
     public void initialize() {
@@ -99,9 +88,13 @@ public class GUIController {
         imageView.setImage(null);
     }
 
+    @FXML
     public void sendButtonClicked() {
+        // Implement your logic for the sendButtonClicked event
     }
 
+    @FXML
     public void uploadImageButtonClicked() {
+        // Implement your logic for the uploadImageButtonClicked event
     }
 }
