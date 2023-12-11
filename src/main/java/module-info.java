@@ -13,6 +13,13 @@ module InfoScreen{
 
     // Add other module declarations if needed
 
+    //The following lines are f***ing important!
+    opens server to javafx.fxml; // Add this line to open the 'server' package to javafx.fxml
+    opens client to javafx.fxml; // Add this line to open the 'client' package to javafx.fxml
+    opens resources to javafx.fxml; // Add this line to open the 'resources' package to javafx.fxml
+
+
+
     // Export the package containing your Application class
     exports client;
     exports server;

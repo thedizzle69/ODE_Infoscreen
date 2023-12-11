@@ -7,29 +7,28 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 
 public class ClientApp extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         String fxmlPath = "GUI.fxml";
-        URL resourceUrl = getClass().getResource(fxmlPath);
 
-        if (resourceUrl == null) {
-            System.err.println("FXML file not found: " + fxmlPath);
-        } else {
-            FXMLLoader loader = new FXMLLoader(resourceUrl);
-            try {
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                primaryStage.setScene(scene);
-                primaryStage.setTitle("Client App");
-                primaryStage.show();
-            } catch (IOException e) {
-                System.err.println("Error loading FXML file: " + fxmlPath);
-                e.printStackTrace();
-            }
+        // Resolve the path to the FXML file
+        Path path = FileSystems.getDefault().getPath(fxmlPath);
+
+        try {
+            // Load FXML file directly from the file system
+            Parent root = FXMLLoader.load(path.toUri().toURL());
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Client App");
+            primaryStage.show();
+        } catch (IOException e) {
+            System.err.println("Error loading FXML file: " + fxmlPath);
+            e.printStackTrace();
         }
     }
 
