@@ -1,8 +1,6 @@
 package server;
 
 import client.Content;
-// import resources.ContentType;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +12,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Objects;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 
 public class ServerApp extends Application {
     private ServerSocket serverSocket;
@@ -25,26 +24,40 @@ public class ServerApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        String fxmlPath = "ServerApp.fxml";
+
+        // Resolve the path to the FXML file
+        Path path = FileSystems.getDefault().getPath(fxmlPath);
+
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ServerApp.fxml")));
+            // Load FXML file directly from the file system
+            FXMLLoader loader = new FXMLLoader(path.toUri().toURL());
+            Parent root = loader.load();
+
+            // Get the controller instance
+            ServerController controller = loader.getController();
+
             primaryStage.setTitle("InfoScreen Server");
-            primaryStage.setScene(new Scene(root, 600, 400));
+            primaryStage.setScene(new Scene(root, 600.0, 400.0));
             primaryStage.show();
 
-            startServer();
+            if (controller == null) {
+                System.err.println("Controller is null");
+            } else {
+                System.out.println("Controller loaded successfully");
+            }
 
+            // Start the server
+            startServer(controller);
         } catch (IOException e) {
+            System.err.println("Error loading FXML file: " + fxmlPath);
             e.printStackTrace();
-            // Handle FXML loading exception here
         }
     }
 
+
     @Override
     public void stop() {
-        // Perform cleanup and close resources (e.g., ServerSocket)
-        // This method is called when the application is stopped.
-        // Make sure to stop the server gracefully.
-        // For simplicity, you can just close the ServerSocket in this example.
         try {
             if (serverSocket != null && !serverSocket.isClosed()) {
                 serverSocket.close();
@@ -54,37 +67,38 @@ public class ServerApp extends Application {
         }
     }
 
-    private void startServer() {
-        try (ServerSocket serverSocket = new ServerSocket(5555)) {
-            System.out.println("Server is running. Waiting for client connection...");
+    private void startServer(ServerController controller) {
+        try {
+            serverSocket = new ServerSocket(5555);
 
             while (!Thread.interrupted()) {
                 try {
                     Socket clientSocket = serverSocket.accept();
                     System.out.println("Client connected.");
-
-                    new Thread(() -> processClientContent(clientSocket)).start();
+                    new Thread(() -> processClientContent(clientSocket, controller)).start();
                 } catch (IOException e) {
-                    e.printStackTrace(); // Handle the exception or log it
+                    e.printStackTrace();
                 }
             }
 
+            serverSocket.close();
         } catch (IOException e) {
-            e.printStackTrace(); // Handle the exception or log it
+            e.printStackTrace();
         }
     }
 
-
-    private void processClientContent(Socket clientSocket) {
+    private void processClientContent(Socket clientSocket, ServerController controller) {
         try {
             ObjectInputStream inputStream = new ObjectInputStream(clientSocket.getInputStream());
             Content receivedContent = (Content) inputStream.readObject();
             System.out.println("Received content from client: " + receivedContent.getData());
-
-            // Perform UI update on the JavaFX Application Thread
-            Platform.runLater(() -> ScreenOutput.displayContent(ContentProcessor.processContent(receivedContent)));
-
-        } catch (IOException | ClassNotFoundException e) {
+            Platform.runLater(() -> {
+                // Update dynamic information in the controller
+                controller.updateDynamicInfo("Received content from client: " + receivedContent.getData());
+                // Assuming ScreenOutput and ContentProcessor are available
+                ScreenOutput.displayContent(ContentProcessor.processContent(receivedContent));
+            });
+        } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
     }
