@@ -25,6 +25,8 @@
     <dependencies>
         <!-- Other dependencies -->
 
+
+
         <!-- JavaFX Web -->
         <dependency>
             <groupId>org.openjfx</groupId>
