@@ -2,11 +2,17 @@ package server;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+<<<<<<< HEAD
 import javafx.scene.layout.BorderPane;
 
 public class ServerController {
 
     public BorderPane root;
+=======
+
+public class ServerController {
+
+>>>>>>> origin/diz2.0
     @FXML
     private Label serverStatusLabel;
 
