@@ -1,21 +1,28 @@
 package client;
 
+import javafx.event.ActionEvent;
+import javafx.scene.layout.BorderPane;
 import resources.ContentType;
 
-import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
+import javafx.scene.image.PixelReader;
+// import javafx.scene.image.WritableImage;
+import javafx.scene.paint.Color;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 
-import javax.imageio.ImageIO;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 
 public class GUIController {
+    public BorderPane root;
+    public Button clearButton;
+    public Button saveButton;
+    public Button loadButton;
+    public Button exitButton;
     @FXML
     private TextArea contentTextArea;
 
@@ -27,6 +34,10 @@ public class GUIController {
 
     @FXML
     private Button uploadImageButton;
+
+    public GUIController(TextArea contentTextArea) {
+        this.contentTextArea = contentTextArea;
+    }
 
     @FXML
     public void initialize() {
@@ -57,21 +68,40 @@ public class GUIController {
             try {
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 Image image = imageView.getImage();
-                BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
+                PixelReader pixelReader = image.getPixelReader();
 
-                // Use JavaFX classes for image writing
-                javax.imageio.ImageIO.write(bufferedImage, "png", byteArrayOutputStream);
+                int width = (int) image.getWidth();
+                int height = (int) image.getHeight();
+
+                for (int y = 0; y < height; y++) {
+                    for (int x = 0; x < width; x++) {
+                        Color color = pixelReader.getColor(x, y);
+                        int red = (int) (color.getRed() * 255);
+                        int green = (int) (color.getGreen() * 255);
+                        int blue = (int) (color.getBlue() * 255);
+
+                        byteArrayOutputStream.write(red);
+                        byteArrayOutputStream.write(green);
+                        byteArrayOutputStream.write(blue);
+                    }
+                }
+
                 return byteArrayOutputStream.toByteArray();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         return null;
     }
 
-
     private void clearInput() {
         contentTextArea.clear();
         imageView.setImage(null);
+    }
+
+    public void sendButtonClicked() {
+    }
+
+    public void uploadImageButtonClicked() {
     }
 }
