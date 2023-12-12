@@ -1,12 +1,9 @@
 package client;
 
 
-import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 public class LoginController {
 
@@ -21,6 +18,14 @@ public class LoginController {
     @FXML
     private Button loginButton;
 
+
+    private Stage primaryStage;
+
+    // Add this method to set the primaryStage
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
+
     @FXML
     public void loginButtonClicked() {
         String username = usernameField.getText();
@@ -29,21 +34,16 @@ public class LoginController {
         if (isValidCredentials(username, password)) {
             loginSuccessful = true;
 
-            System.out.println("Login successful. Trying to load main app.");
+            System.out.println("Login successful.");
 
 /*
             // Use Platform.runLater to run on the JavaFX Application Thread
-            Platform.runLater(() -> openMainApp(primaryStage));
-
-
- */
-
-
+           openMainApp(primaryStage);
             openMainApp(loginButton.getScene().getWindow());
-
+*/
 
         } else {
-            showAlert("Invalid credentials", "Please enter valid username and password.", Alert.AlertType.ERROR);
+            showAlert();
         }
     }
 
@@ -53,19 +53,21 @@ public class LoginController {
                 ("user".equals(username) && "userkey".equals(password));
     }
 
-    public boolean isLoginSuccessful() {
-        return loginSuccessful;
-    }
 
-    private void openMainApp(Window window) {
+  /*  private void openMainApp(Window window) {
         // Close the login window
         Stage stage = (Stage) window;
         stage.close();
+        // Open the main app window
+
     }
 
-    private void showAlert(String title, String content, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType, content, ButtonType.OK);
-        alert.setTitle(title);
+
+
+   */
+    private void showAlert() {
+        Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter valid username and password.", ButtonType.OK);
+        alert.setTitle("Invalid credentials");
         alert.showAndWait();
     }
 }

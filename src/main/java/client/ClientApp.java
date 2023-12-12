@@ -17,15 +17,14 @@ public class ClientApp extends Application {
     public void start(Stage primaryStage) {
         LoginController loginController = openLoginScreen(primaryStage);
 
- /*       // Check if login was successful before loading the main application window
-        if (loginController != null && loginController.isLoginSuccessful()) {
-
-            System.out.println("Login successful!");
-
+/*        // Check if login was successful before loading the main application window
+        if (loginController != null && loginController.loginSuccessful()) {
+            System.out.println("opening main app!");
             // Use Platform.runLater to run on the JavaFX Application Thread
             Platform.runLater(() -> openMainApp(primaryStage));
         }
-*/
+
+ */
     }
 
     private LoginController openLoginScreen(Stage primaryStage) {
@@ -41,18 +40,23 @@ public class ClientApp extends Application {
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Login");
+
+            // Pass primaryStage to the controller
+            LoginController loginController = loader.getController();
+            loginController.setPrimaryStage(primaryStage);
+
             primaryStage.show();
 
-            return loader.getController();
+            return loginController;
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    private void openMainApp(Stage primaryStage) {
+    static void openMainApp(Stage primaryStage) {
 
-        printf("Login correct. Loading program...");
+        System.out.println("Fetching GUI.fxml");
 
         String fxmlPath = "GUI.fxml";
 
