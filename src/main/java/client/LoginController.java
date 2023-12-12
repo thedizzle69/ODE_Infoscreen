@@ -1,10 +1,16 @@
 package client;
 
 
+import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+
 public class LoginController {
+
+    private boolean loginSuccessful = false;
 
     @FXML
     private TextField usernameField;
@@ -21,7 +27,21 @@ public class LoginController {
         String password = passwordField.getText();
 
         if (isValidCredentials(username, password)) {
-            openMainApp();
+            loginSuccessful = true;
+
+            System.out.println("Login successful. Trying to load main app.");
+
+/*
+            // Use Platform.runLater to run on the JavaFX Application Thread
+            Platform.runLater(() -> openMainApp(primaryStage));
+
+
+ */
+
+
+            openMainApp(loginButton.getScene().getWindow());
+
+
         } else {
             showAlert("Invalid credentials", "Please enter valid username and password.", Alert.AlertType.ERROR);
         }
@@ -33,14 +53,14 @@ public class LoginController {
                 ("user".equals(username) && "userkey".equals(password));
     }
 
-    private void openMainApp() {
-        // Close the login window
-        Stage stage = (Stage) loginButton.getScene().getWindow();
-        stage.close();
+    public boolean isLoginSuccessful() {
+        return loginSuccessful;
+    }
 
-        // Open the main application window
-        ClientApp app = new ClientApp();
-        app.start(new Stage());
+    private void openMainApp(Window window) {
+        // Close the login window
+        Stage stage = (Stage) window;
+        stage.close();
     }
 
     private void showAlert(String title, String content, Alert.AlertType alertType) {
