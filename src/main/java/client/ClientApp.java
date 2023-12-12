@@ -14,7 +14,7 @@ public class ClientApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        String fxmlPath = "GUI.fxml";
+        String fxmlPath = "LoginScreen.fxml";
 
         // Resolve the path to the FXML file
         Path path = FileSystems.getDefault().getPath(fxmlPath);

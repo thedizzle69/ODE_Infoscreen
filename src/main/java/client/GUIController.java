@@ -2,7 +2,7 @@ package client;
 
 import resources.ContentType;
 
-import javafx.event.ActionEvent;
+// import javafx.event.ActionEvent;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.paint.Color;
