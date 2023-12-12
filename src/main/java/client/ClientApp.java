@@ -15,9 +15,12 @@ public class ClientApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        LoginController loginController = openLoginScreen(primaryStage);
 
         System.out.println("Hello There...");
+
+        LoginController loginController = openLoginScreen(primaryStage);
+
+        System.out.println("General Kenobi!");
 
 /*        // Check if login was successful before loading the main application window
         if (loginController != null && loginController.loginSuccessful()) {
