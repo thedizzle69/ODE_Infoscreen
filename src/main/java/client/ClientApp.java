@@ -17,6 +17,8 @@ public class ClientApp extends Application {
     public void start(Stage primaryStage) {
         LoginController loginController = openLoginScreen(primaryStage);
 
+        System.out.println("Hello There...");
+
 /*        // Check if login was successful before loading the main application window
         if (loginController != null && loginController.loginSuccessful()) {
             System.out.println("opening main app!");
@@ -25,9 +27,22 @@ public class ClientApp extends Application {
         }
 
  */
+
+        assert loginController != null;
+        if (loginController.loginSuccessful) {
+
+            System.out.println("Trying to load MainApplication...");
+
+            openMainApp(primaryStage);
+
+        }
+
     }
 
     private LoginController openLoginScreen(Stage primaryStage) {
+
+        System.out.println("Fetching LoginController.fxml");
+
         String fxmlPath = "LoginController.fxml";
 
         // Resolve the path to the FXML file
@@ -47,10 +62,19 @@ public class ClientApp extends Application {
 
             primaryStage.show();
 
+            System.out.println("Fetched and will return in 3 seconds");
+
+            Thread.sleep(3000);
+
             return loginController;
+
+            //works
+
         } catch (IOException e) {
             e.printStackTrace();
             return null;
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 

@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 public class LoginController {
 
-    private boolean loginSuccessful = false;
+    boolean loginSuccessful = false;
 
     @FXML
     private TextField usernameField;
@@ -19,7 +19,7 @@ public class LoginController {
     private Button loginButton;
 
 
-    private Stage primaryStage;
+     private Stage primaryStage;
 
     // Add this method to set the primaryStage
     public void setPrimaryStage(Stage primaryStage) {
