@@ -46,7 +46,7 @@ public class ClientApp extends Application {
 
         System.out.println("Fetching LoginController.fxml");
 
-        String fxmlPath = "LoginController.fxml";
+        String fxmlPath = "src/main/java/resources/LoginController.fxml";
 
         // Resolve the path to the FXML file
         Path path = FileSystems.getDefault().getPath(fxmlPath);
@@ -85,7 +85,7 @@ public class ClientApp extends Application {
 
         System.out.println("Fetching GUI.fxml");
 
-        String fxmlPath = "GUI.fxml";
+        String fxmlPath = "src/main/java/resources/GUI.fxml";
 
         // Resolve the path to the FXML file
         Path path = FileSystems.getDefault().getPath(fxmlPath);

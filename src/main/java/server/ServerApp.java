@@ -24,7 +24,7 @@ public class ServerApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        String fxmlPath = "ServerApp.fxml";
+        String fxmlPath = "src/main/java/resources/ServerApp.fxml";
 
         // Resolve the path to the FXML file
         Path path = FileSystems.getDefault().getPath(fxmlPath);

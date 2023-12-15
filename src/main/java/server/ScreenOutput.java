@@ -19,7 +19,7 @@ public class ScreenOutput extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../resources/ScreenOutput.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("src/main/java/resources/ScreenOutput.fxml")));
         primaryStage.setTitle("InfoScreen Output");
         Scene scene = new Scene(root, 1920, 1080); // Full HD resolution
         primaryStage.setScene(scene);
