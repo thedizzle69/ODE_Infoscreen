@@ -36,8 +36,10 @@ public class LoginController {
 
             System.out.println("Login successful.");
 
-        }
 
+
+
+        }
 
 /*
             // Use Platform.runLater to run on the JavaFX Application Thread
@@ -46,9 +48,13 @@ public class LoginController {
 */
 
 
-        } else {
-            showAlert();
+         /* else {
+
+             System.out.println("Login failed.");
+            // showAlert();
         }
+        */
+
 
     }
 
