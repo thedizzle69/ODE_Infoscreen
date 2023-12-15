@@ -38,12 +38,15 @@ public class LoginController {
 
 
 
+
         }
+
 /*
             // Use Platform.runLater to run on the JavaFX Application Thread
            openMainApp(primaryStage);
             openMainApp(loginButton.getScene().getWindow());
 */
+
 
          /* else {
 
@@ -51,6 +54,7 @@ public class LoginController {
             // showAlert();
         }
         */
+
 
     }
 
