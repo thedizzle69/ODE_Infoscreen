@@ -36,16 +36,17 @@ public class LoginController {
 
             System.out.println("Login successful.");
 
-
-
         }
+
+
 /*
             // Use Platform.runLater to run on the JavaFX Application Thread
            openMainApp(primaryStage);
             openMainApp(loginButton.getScene().getWindow());
 */
 
-         else {
+
+        } else {
             showAlert();
         }
 
