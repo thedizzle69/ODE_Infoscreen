@@ -31,8 +31,9 @@ public class ClientApp extends Application {
 
  */
 
-        assert loginController != null;
-        if (loginController.loginSuccessful) {
+        // assert loginController != null; commented out as not working correctly
+
+        if (loginController != null && loginController.loginSuccessful) {
 
             System.out.println("Trying to load MainApplication...");
 
