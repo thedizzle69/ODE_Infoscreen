@@ -31,15 +31,20 @@ public class ClientApp extends Application {
 
  */
 
-        assert loginController != null;
-        if (loginController.loginSuccessful) {
+        // assert loginController != null; commented out as not working correctly
 
-            System.out.println("Trying to load MainApplication...");
+        if (loginController != null) {
+            System.out.println("loginController is not null");
 
-            openMainApp(primaryStage);
-
+            /* if (loginController.loginSuccessful) {
+                System.out.println("Login successful. Trying to load MainApplication...");
+                openMainApp(primaryStage);
+            } else {
+                System.out.println("Login unsuccessful.");
+            }*/ // commented out as not working correctly
+        } else {
+            System.out.println("loginController is null.");
         }
-
     }
 
     private LoginController openLoginScreen(Stage primaryStage) {
@@ -81,7 +86,7 @@ public class ClientApp extends Application {
         }
     }
 
-    static void openMainApp(Stage primaryStage) {
+    public static void openMainApp(Stage primaryStage) {
 
         System.out.println("Fetching GUI.fxml");
 
