@@ -36,9 +36,13 @@ public class LoginController {
 
             System.out.println("Login successful.");
 
+            ClientApp.openMainApp(primaryStage);
 
+        }
 
-
+        else {
+            System.out.println("Login failed.");
+            showAlert();
         }
 
 /*
