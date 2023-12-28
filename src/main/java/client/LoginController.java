@@ -36,7 +36,6 @@ public class LoginController {
 
             System.out.println("Login successful.");
 
-
             ClientApp.openMainApp(primaryStage);
 
         }
@@ -44,9 +43,6 @@ public class LoginController {
         else {
             System.out.println("Login failed.");
             showAlert();
-        }
-
-
         }
 
 /*
