@@ -77,6 +77,7 @@ public class LoginController {
 
     }
 
+
    */
     private void showAlert() {
         Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter valid username and password.", ButtonType.OK);
