@@ -48,7 +48,8 @@ public class ServerApp extends Application {
             }
 
             // Start the server
-            startServer(controller);
+            startServer(controller); //not finished
+
         } catch (IOException e) {
             System.err.println("Error loading FXML file: " + fxmlPath);
             e.printStackTrace();
@@ -70,10 +71,13 @@ public class ServerApp extends Application {
     private void startServer(ServerController controller) {
         try {
             serverSocket = new ServerSocket(5555);
+            System.out.println("server1");
 
             while (!Thread.interrupted()) {
                 try {
-                    Socket clientSocket = serverSocket.accept();
+                    System.out.println("server2");
+                    Socket clientSocket = serverSocket.accept(); //failing here
+                    System.out.println("server3");
                     System.out.println("Client connected.");
                     new Thread(() -> processClientContent(clientSocket, controller)).start();
                 } catch (IOException e) {
@@ -90,13 +94,19 @@ public class ServerApp extends Application {
     private void processClientContent(Socket clientSocket, ServerController controller) {
         try {
             ObjectInputStream inputStream = new ObjectInputStream(clientSocket.getInputStream());
+
             Content receivedContent = (Content) inputStream.readObject();
+
             System.out.println("Received content from client: " + receivedContent.getData());
+
             Platform.runLater(() -> {
                 // Update dynamic information in the controller
+
                 controller.updateDynamicInfo("Received content from client: " + receivedContent.getData());
+
                 // Assuming ScreenOutput and ContentProcessor are available
                 ScreenOutput.displayContent(ContentProcessor.processContent(receivedContent));
+
             });
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
