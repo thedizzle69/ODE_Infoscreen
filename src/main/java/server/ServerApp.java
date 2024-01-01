@@ -48,7 +48,8 @@ public class ServerApp extends Application {
             }
 
             // Start the server
-            startServer(controller); //not finished
+            new Thread(() -> startServer(controller)).start();
+
 
         } catch (IOException e) {
             System.err.println("Error loading FXML file: " + fxmlPath);
