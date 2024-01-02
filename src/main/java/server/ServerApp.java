@@ -105,8 +105,14 @@ public class ServerApp extends Application {
 
                 controller.updateDynamicInfo("Received content from client: " + receivedContent.getData());
 
+                /*
                 // Assuming ScreenOutput and ContentProcessor are available
                 ScreenOutput.displayContent(ContentProcessor.processContent(receivedContent));
+*/
+                //assuming is weak. Let's just update
+
+                //Update content in ScreenOutput
+                ScreenOutput.updateContent(ContentProcessor.processContent(receivedContent));
 
             });
         } catch (ClassNotFoundException | IOException e) {
