@@ -70,15 +70,16 @@ public class ServerApp extends Application {
     }
 
     private void startServer(ServerController controller) {
+        new Thread(() -> {
         try {
             serverSocket = new ServerSocket(5555);
             System.out.println("server1");
 
             while (!Thread.interrupted()) {
                 try {
-                    System.out.println("server2");
+
                     Socket clientSocket = serverSocket.accept(); //failing here
-                    System.out.println("server3");
+
                     System.out.println("Client connected.");
                     new Thread(() -> processClientContent(clientSocket, controller)).start();
                 } catch (IOException e) {
@@ -90,6 +91,7 @@ public class ServerApp extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        }).start();
     }
 
     private void processClientContent(Socket clientSocket, ServerController controller) {

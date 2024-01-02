@@ -14,7 +14,7 @@ public class ScreenOutput extends Application {
 
     public static void displayContent(String content) {
         contentToDisplay = content;
-        launch();
+        //launch();
     }
 
     @Override
