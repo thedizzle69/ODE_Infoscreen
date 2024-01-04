@@ -87,7 +87,7 @@ public class ServerApp extends Application {
                 }
             }
 
-            serverSocket.close();
+           // serverSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

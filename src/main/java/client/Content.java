@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 public record Content(ContentType contentType, String textContent, byte[] imageContent) implements Serializable {
 
+
     public String getData() {
 
         if (contentType == ContentType.TEXT) {
