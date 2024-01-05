@@ -33,12 +33,17 @@ public class ServerController {
 
     @FXML
     public void handleDisplayContent() {
+
+
+
+
+
         if (screenOutput == null) {
             screenOutput = new ScreenOutput();
         }
         // You need to implement how to get the content from the client
         String content = getContentFromClient();
-        screenOutput.displayContent(content);
+        screenOutput.displayContent(lvListView.getSelectionModel().getSelectedItem());
     }
 
 

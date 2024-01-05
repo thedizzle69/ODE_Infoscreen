@@ -132,10 +132,11 @@ public class ServerApp extends Application {
             appendToLog("Received content from client: " + receivedContent.getData() +"\n");
 
             //todo Objekt als List view Speichern
-            contentList.add(receivedContent.toString());
-            System.out.println(contentList.toString());
-            myController.updateListView(contentList);
 
+            Platform.runLater(() -> {
+                contentList.add(receivedContent.toString());
+                myController.updateListView(contentList);
+            });
 
                 //String processedContent = ContentProcessor.processContent(receivedContent);
                 //screenOutput.displayContent(processedContent); // Call the instance method
