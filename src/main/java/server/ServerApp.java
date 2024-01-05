@@ -1,6 +1,7 @@
 package server;
 
 import client.Content;
+import server.ScreenOutput;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -74,6 +75,7 @@ public class ServerApp extends Application {
         try {
             serverSocket = new ServerSocket(5555);
             System.out.println("server1");
+            ScreenOutput ScreenOutput = new ScreenOutput(); // Initialize it here
 
             while (!Thread.interrupted()) {
                 try {
@@ -93,6 +95,10 @@ public class ServerApp extends Application {
         }
         }).start();
     }
+    // Somewhere in your ServerApp class, declare the ScreenOutput instance
+    private ScreenOutput screenOutput;
+
+
 
     private void processClientContent(Socket clientSocket, ServerController controller) {
         try {
@@ -108,9 +114,10 @@ public class ServerApp extends Application {
                 controller.updateDynamicInfo("Received content from client: " + receivedContent.getData());
 
                 // Assuming ScreenOutput and ContentProcessor are available
-                ScreenOutput.displayContent(ContentProcessor.processContent(receivedContent));
-
+                String processedContent = ContentProcessor.processContent(receivedContent);
+                screenOutput.displayContent(processedContent); // Call the instance method
             });
+
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
