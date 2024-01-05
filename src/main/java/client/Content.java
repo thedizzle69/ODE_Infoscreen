@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 public record Content(ContentType contentType, String textContent, byte[] imageContent) implements Serializable {
 
+
     public String getData() {
 
         if (contentType == ContentType.TEXT) {
@@ -16,5 +17,14 @@ public record Content(ContentType contentType, String textContent, byte[] imageC
         } else {
             return "Unknown Content Type";
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Content{" +
+                "contentType=" + contentType +
+                ", textContent='" + textContent + '\'' +
+                ", imageContent=" + Arrays.toString(imageContent) +
+                '}';
     }
 }
