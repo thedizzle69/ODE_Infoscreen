@@ -1,63 +1,104 @@
 package server;
 
 import client.Content;
-import server.ScreenOutput;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
 public class ServerApp extends Application {
-    private ServerSocket serverSocket;
+    private ServerSocket serverSocket= null;
+    private Socket ClientSocket= null;
+
+    private ServerController myController= null;
+
+    ObservableList<String> contentList =FXCollections.observableArrayList();
+
+    private  String logMessages;
+
+
+    public String getLogMessages() {
+        return logMessages;
+    }
 
     public static void main(String[] args) {
         launch(args);
     }
 
+
+
     @Override
     public void start(Stage primaryStage) {
-        String fxmlPath = "src/main/java/resources/ServerApp.fxml";
 
-        // Resolve the path to the FXML file
-        Path path = FileSystems.getDefault().getPath(fxmlPath);
+
+
+        logMessages= " Loading main frame...\n";
 
         try {
-            // Load FXML file directly from the file system
-            FXMLLoader loader = new FXMLLoader(path.toUri().toURL());
+            String fxmlPath = "src/main/java/resources/ServerApp.fxml";
+            Path path = FileSystems.getDefault().getPath(fxmlPath);
+            FXMLLoader loader= new FXMLLoader(path.toUri().toURL());
             Parent root = loader.load();
 
-            // Get the controller instance
-            ServerController controller = loader.getController();
 
-            primaryStage.setTitle("InfoScreen Server");
-            primaryStage.setScene(new Scene(root, 600.0, 400.0));
+            System.out.println("loading successful");
+            primaryStage.setScene(new Scene(root, 600,400));
             primaryStage.show();
-
-            if (controller == null) {
-                System.err.println("Controller is null");
-            } else {
-                System.out.println("Controller loaded successfully");
-            }
-
-            // Start the server
-            new Thread(() -> startServer(controller)).start();
+            myController= loader.getController();
 
 
-        } catch (IOException e) {
-            System.err.println("Error loading FXML file: " + fxmlPath);
-            e.printStackTrace();
+
+                   } catch (IOException e) {
+            System.out.println("Loader Failed");
+            throw new RuntimeException(e);
+
+
         }
+
+        appendToLog(" Main Frame loaded successfully\n");
+
+        startServer();
+
     }
 
+    private void startServer() {
+
+        appendToLog(" Starting Server...\n");
+
+        new Thread(() -> {
+            try {
+                serverSocket = new ServerSocket(5555);
+
+                while(true)
+                {
+                    ClientSocket = serverSocket.accept();
+                    appendToLog("Server accepted, connected to" + ClientSocket.getInetAddress()+ "\n");
+                    new Thread(() -> processClientContent()).start();
+                }
+
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        }).start();
+    }
+
+
+
+
+
+    // Somewhere in your ServerApp class, declare the ScreenOutput instance
 
     @Override
     public void stop() {
@@ -70,53 +111,35 @@ public class ServerApp extends Application {
         }
     }
 
-    private void startServer(ServerController controller) {
-        new Thread(() -> {
-        try {
-            serverSocket = new ServerSocket(5555);
-            System.out.println("server1");
-            ScreenOutput ScreenOutput = new ScreenOutput(); // Initialize it here
-
-            while (!Thread.interrupted()) {
-                try {
-
-                    Socket clientSocket = serverSocket.accept(); //failing here
-
-                    System.out.println("Client connected.");
-                    new Thread(() -> processClientContent(clientSocket, controller)).start();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-           // serverSocket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        }).start();
+    private void appendToLog(String Log)
+    {
+        logMessages=logMessages+Log;
+        Platform.runLater(() -> {
+            myController.setTextInTextArea(logMessages);
+        });
     }
-    // Somewhere in your ServerApp class, declare the ScreenOutput instance
+
+
     private ScreenOutput screenOutput;
 
 
 
-    private void processClientContent(Socket clientSocket, ServerController controller) {
+    private void processClientContent()
+        {
         try {
-            ObjectInputStream inputStream = new ObjectInputStream(clientSocket.getInputStream());
-
+            ObjectInputStream inputStream = new ObjectInputStream(ClientSocket.getInputStream());
             Content receivedContent = (Content) inputStream.readObject();
+            appendToLog("Received content from client: " + receivedContent.getData() +"\n");
 
-            System.out.println("Received content from client: " + receivedContent.getData());
+            //todo Objekt als List view Speichern
+            contentList.add(receivedContent.toString());
+            System.out.println(contentList.toString());
+            myController.updateListView(contentList);
 
-            Platform.runLater(() -> {
-                // Update dynamic information in the controller
 
-                controller.updateDynamicInfo("Received content from client: " + receivedContent.getData());
+                //String processedContent = ContentProcessor.processContent(receivedContent);
+                //screenOutput.displayContent(processedContent); // Call the instance method
 
-                // Assuming ScreenOutput and ContentProcessor are available
-                String processedContent = ContentProcessor.processContent(receivedContent);
-                screenOutput.displayContent(processedContent); // Call the instance method
-            });
 
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();

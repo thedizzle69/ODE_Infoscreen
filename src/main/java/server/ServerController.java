@@ -1,8 +1,14 @@
 package server;
 
+import client.Content;
+import javafx.application.Platform;
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 
 public class ServerController {
@@ -11,7 +17,7 @@ public class ServerController {
     private Label dynamicInfoLabel;
 
     @FXML
-    private ListView<?> lvListView;
+    private ListView<String> lvListView= new ListView<>();;
 
     @FXML
     private BorderPane root;
@@ -19,16 +25,11 @@ public class ServerController {
     @FXML
     private Label serverStatusLabel;
 
-// You can add methods to update dynamic information
-    public void updateDynamicInfo(String info) {
-        dynamicInfoLabel.setText(info);
-    }
+    @FXML
+    private TextArea tfLogField;
 
-    // Add other controller logic as needed
 
     private ScreenOutput screenOutput;
-
-    // Other fields and methods...
 
     @FXML
     public void handleDisplayContent() {
@@ -38,6 +39,22 @@ public class ServerController {
         // You need to implement how to get the content from the client
         String content = getContentFromClient();
         screenOutput.displayContent(content);
+    }
+
+
+
+    public void updateListView(ObservableList<String> contentList)
+    {
+        lvListView.setItems(contentList);
+
+    //todo implement list view
+
+
+
+    }
+
+    public void setTextInTextArea(String text) {
+    tfLogField.setText(text);
     }
 
     // Method to get content from the client, to be implemented as per your application logic

@@ -18,4 +18,13 @@ public record Content(ContentType contentType, String textContent, byte[] imageC
             return "Unknown Content Type";
         }
     }
+
+    @Override
+    public String toString() {
+        return "Content{" +
+                "contentType=" + contentType +
+                ", textContent='" + textContent + '\'' +
+                ", imageContent=" + Arrays.toString(imageContent) +
+                '}';
+    }
 }
