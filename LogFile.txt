@@ -1,0 +1,15 @@
+ Loading main frame...
+ Main Frame loaded successfully
+ Starting Server...
+Server accepted, connected to/127.0.0.1
+Received content from client: adsadaw
+Server accepted, connected to/127.0.0.1
+Received content from client: dasdawdas
+Server accepted, connected to/127.0.0.1
+Received content from client: sdadw
+Server accepted, connected to/127.0.0.1
+Received content from client: dawdas
+Server accepted, connected to/127.0.0.1
+Received content from client: awdsdawdaw
+
+ Logfile exported...

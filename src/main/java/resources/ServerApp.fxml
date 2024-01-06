@@ -12,7 +12,7 @@
    <bottom>
       <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <buttons>
-          <Button fx:id="btExportLog" mnemonicParsing="false" text="Export Log" />
+          <Button fx:id="btExportLog" mnemonicParsing="false" onAction="#ExportLogButtonPressed" text="Export Log" />
            <Button fx:id="btDisplayChosen" mnemonicParsing="false" onAction="#handleDisplayContent" text="Display Chosen Content" />
         </buttons>
       </ButtonBar>

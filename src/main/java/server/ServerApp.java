@@ -1,3 +1,22 @@
+/**
+ * The `ServerApp` class represents the main server application for handling client connections
+ * and managing content received from clients. It extends the JavaFX `Application` class and
+ * provides a graphical user interface for server interaction.
+ *
+ * The server operates on a separate thread to accept client connections and processes incoming
+ * content from clients. The server utilizes JavaFX components for the user interface, including
+ * a main frame and a text area for displaying log messages.
+ *
+ * The server application is designed to receive instances of the `Content` class from clients,
+ * update a JavaFX `ListView` with the received content, and display log messages in the text area.
+ *
+ * The server follows a multi-threaded approach, creating a new thread for each connected client to
+ * handle content processing asynchronously.
+ *
+ * @author Samuel Bißmann
+ * @version 1.0
+ * @since 2024-01-06
+ */
 package server;
 
 import client.Content;
@@ -26,18 +45,27 @@ public class ServerApp extends Application {
 
     private  String logMessages;
 
-
     public String getLogMessages() {
         return logMessages;
     }
     private ScreenOutput screenOutput;
 
+    /**
+     * The main method for launching the server application.
+     *
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         launch(args);
     }
 
 
-
+    /**
+     * Overrides the start method of the JavaFX `Application` class to initialize the main frame,
+     * set up the user interface, and start the server.
+     *
+     * @param primaryStage The primary stage for the JavaFX application.
+     */
     @Override
     public void start(Stage primaryStage) {
 
@@ -57,7 +85,11 @@ public class ServerApp extends Application {
             primaryStage.setScene(new Scene(root, 600,400));
             primaryStage.show();
             myController= loader.getController();
+
             myController.setScreenOutput(screenOutput); //
+
+
+            myController.setObservable(contentList);
 
 
 
@@ -74,6 +106,10 @@ public class ServerApp extends Application {
 
     }
 
+    /**
+     * Starts the server on a separate thread, accepting client connections and spawning threads
+     * for each connected client to process incoming content.
+     */
     private void startServer() {
 
         appendToLog(" Starting Server...\n");
@@ -102,6 +138,10 @@ public class ServerApp extends Application {
 
 
 
+    /**
+     * Overrides the stop method of the JavaFX `Application` class to handle cleanup tasks when
+     * the application is closed, such as closing the server socket.
+     */
     @Override
     public void stop() {
         try {
@@ -113,6 +153,12 @@ public class ServerApp extends Application {
         }
     }
 
+    /**
+     * Appends log messages to the logMessages string and updates the JavaFX text area
+     * with the latest log messages.
+     *
+     * @param log Log message to be appended.
+     */
     private void appendToLog(String Log)
     {
         logMessages=logMessages+Log;
@@ -124,7 +170,10 @@ public class ServerApp extends Application {
 
 
 
-
+    /**
+     * Processes content received from a connected client. It deserializes the content,
+     * updates the JavaFX `ListView` with the received content, and displays log messages.
+     */
     private void processClientContent()
         {
         try {
@@ -132,13 +181,13 @@ public class ServerApp extends Application {
             Content receivedContent = (Content) inputStream.readObject();
             appendToLog("Received content from client: " + receivedContent.getData() +"\n");
 
-            //todo Objekt als List view Speichern
-            contentList.add(receivedContent.toString());
-            System.out.println(contentList.toString());
-            myController.updateListView(contentList);
+
+            Platform.runLater(() -> {
+                contentList.add(receivedContent.toString());
+                myController.updateListView(contentList);
+            });
 
 
-                //String processedContent = ContentProcessor.processContent(receivedContent);
                 //screenOutput.displayContent(processedContent); // Call the instance method
 
             String contentToShow = receivedContent.getData();
