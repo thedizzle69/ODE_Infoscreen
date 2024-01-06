@@ -112,7 +112,7 @@ public class ServerApp extends Application {
                 //assuming is weak. Let's just update
 
                 //Update content in ScreenOutput
-                ScreenOutput.updateContent(ContentProcessor.processContent(receivedContent));
+                //ScreenOutput.updateContent(ContentProcessor.processContent(receivedContent));
 
             });
         } catch (ClassNotFoundException | IOException e) {
