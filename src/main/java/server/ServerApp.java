@@ -26,7 +26,6 @@ public class ServerApp extends Application {
 
     private  String logMessages;
 
-
     public String getLogMessages() {
         return logMessages;
     }
@@ -55,7 +54,7 @@ public class ServerApp extends Application {
             primaryStage.setScene(new Scene(root, 600,400));
             primaryStage.show();
             myController= loader.getController();
-
+            myController.setObservable(contentList);
 
 
                    } catch (IOException e) {

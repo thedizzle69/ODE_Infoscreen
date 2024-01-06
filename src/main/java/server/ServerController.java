@@ -36,15 +36,13 @@ public class ServerController {
     @FXML
     private TextArea tfLogField;
 
+    private ObservableList<String> items=null;
+
 
     private ScreenOutput screenOutput;
 
     @FXML
     public void handleDisplayContent() {
-
-
-
-
 
         if (screenOutput == null) {
             screenOutput = new ScreenOutput();
@@ -53,7 +51,15 @@ public class ServerController {
         String content = getContentFromClient();
         screenOutput.displayContent(lvListView.getSelectionModel().getSelectedItem());
 
-        System.out.println(lvListView.getSelectionModel().getSelectedItem());
+        int selectedIndex=lvListView.getSelectionModel().getSelectedIndex();
+        if (selectedIndex != -1)
+        {
+            items.remove(selectedIndex);
+
+            tfLogField.appendText("Displaying Element index:n"+selectedIndex);
+        }
+
+
     }
 
 
@@ -62,14 +68,16 @@ public class ServerController {
     {
         lvListView.setItems(contentList);
 
-
-
-
-
     }
 
     public void setTextInTextArea(String text) {
     tfLogField.setText(text);
+    }
+
+    public void setObservable(ObservableList<String> items)
+    {
+        this.items=items;
+
     }
 
     // Method to get content from the client, to be implemented as per your application logic
@@ -85,6 +93,10 @@ public class ServerController {
         try {
             FileWriter myWriter= new FileWriter(ExportLog);
             BufferedWriter bufferedWriter= new BufferedWriter(myWriter);
+
+            tfLogField.appendText("\n Logfile exported...\n");
+
+
             bufferedWriter.write(tfLogField.getText());
             bufferedWriter.close();
 
