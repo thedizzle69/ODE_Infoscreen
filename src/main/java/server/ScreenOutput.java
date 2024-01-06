@@ -1,5 +1,6 @@
 package server;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,31 +24,33 @@ public class ScreenOutput {
         initializeStage();
     }
 
+
     private void initializeStage() {
         String fxmlPath = "src/main/java/resources/ScreenOutput.fxml";
 
-        // Resolve the path to the FXML file
-        Path path = FileSystems.getDefault().getPath(fxmlPath);
-
         try {
+            Path path = FileSystems.getDefault().getPath(fxmlPath);
             FXMLLoader loader = new FXMLLoader(path.toUri().toURL());
+            loader.setController(this);
             Parent root = loader.load();
 
-
-            loader.setController(this);
 
             stage.setTitle("Output");
             stage.setScene(new Scene(root, 400, 200));  // Adjust the size as needed
         } catch (IOException e) {
-            System.err.println("Error loading FXML file: " + fxmlPath);
+            System.err.println("Error loading FXML file: ");
             e.printStackTrace();
         }
     }
 
     public void displayContent(String message) {
-        if (contentLabel != null) {
-            contentLabel.setText(message);
-        }
-        stage.show(); // Show the stage when content is updated
+        System.out.println("Debug: Displaying content - " + message);
+        Platform.runLater(() -> {
+            if (contentLabel != null) {
+                contentLabel.setText(message);
+            } else {
+                System.err.println("contentLabel is null");
+            }
+        });
     }
 }
