@@ -56,24 +56,38 @@ public class ServerController {
         {
             items.remove(selectedIndex);
 
-            tfLogField.appendText("Displaying Element index:n"+selectedIndex);
+            tfLogField.appendText("\nDisplaying Element index:n"+selectedIndex);
         }
 
 
     }
 
 
-
+    /**
+     * Updates the list view with the provided content list.
+     *
+     * @param contentList The content list to be displayed in the list view.
+     */
     public void updateListView(ObservableList<String> contentList)
     {
         lvListView.setItems(contentList);
 
     }
 
+    /**
+     * Sets the text in the log text area.
+     *
+     * @param text The text to be set in the log text area.
+     */
     public void setTextInTextArea(String text) {
     tfLogField.setText(text);
     }
 
+    /**
+     * Sets the observable list for the controller.
+     *
+     * @param items The observable list to be set.
+     */
     public void setObservable(ObservableList<String> items)
     {
         this.items=items;
@@ -87,6 +101,11 @@ public class ServerController {
         return "Content from client";
     }
 
+    /**
+     * Exports the log to a text file when the export log button is pressed.
+     *
+     * @param actionEvent The action event triggered by the button press.
+     */
     public void ExportLogButtonPressed(ActionEvent actionEvent) {
         File ExportLog= new File("LogFile.txt");
 
