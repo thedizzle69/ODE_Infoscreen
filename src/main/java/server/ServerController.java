@@ -127,7 +127,7 @@ public class ServerController {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information");
         alert.setHeaderText("Export Log sucessful!");
-        alert.setContentText("Path"+ ExportLog.getAbsolutePath().toString());
+        alert.setContentText("Path "+ ExportLog.getAbsolutePath().toString());
         alert.showAndWait();
 
 
