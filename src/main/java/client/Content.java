@@ -21,10 +21,16 @@ public record Content(ContentType contentType, String textContent, byte[] imageC
 
     @Override
     public String toString() {
-        return "Content{" +
-                "contentType=" + contentType +
-                ", textContent='" + textContent + '\'' +
-                ", imageContent=" + Arrays.toString(imageContent) +
-                '}';
+
+        if(contentType==ContentType.TEXT) {
+            return "Text erhalten:" + textContent;
+
+        }
+        else
+        {
+            return "Bild erhalten";
+
+
+        }
     }
 }

@@ -9,7 +9,7 @@
  *
  * The server application is designed to receive instances of the `Content` class from clients,
  * update a JavaFX `ListView` with the received content, and display log messages in the text area.
- *
+ *test
  * The server follows a multi-threaded approach, creating a new thread for each connected client to
  * handle content processing asynchronously.
  *
@@ -160,7 +160,7 @@ public class ServerApp extends Application {
      * Appends log messages to the logMessages string and updates the JavaFX text area
      * with the latest log messages.
      *
-     * @param log Log message to be appended.
+     * @param Log Log message to be appended.
      */
     private void appendToLog(String Log)
     {
