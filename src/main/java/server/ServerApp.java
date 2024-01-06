@@ -89,7 +89,7 @@ public class ServerApp extends Application {
             primaryStage.show();
             myController= loader.getController();
 
-            myController.setScreenOutput(screenOutput); //
+           // myController.setScreenOutput(screenOutput); //
 
 
             myController.setObservable(contentList);
