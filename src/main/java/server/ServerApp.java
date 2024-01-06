@@ -40,7 +40,8 @@ public class ServerApp extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-
+        // Check JavaFX version
+        System.out.println("JavaFX Runtime Version: " + System.getProperties().getProperty("javafx.runtime.version"));
 
         logMessages= " Loading main frame...\n";
 
