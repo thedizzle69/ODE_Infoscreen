@@ -49,7 +49,8 @@ public class ServerController {
         }
         // You need to implement how to get the content from the client
         String content = getContentFromClient();
-        screenOutput.displayContent(lvListView.getSelectionModel().getSelectedItem());
+
+        screenOutput.displayContent(lvListView.getSelectionModel().getSelectedItem().toString());
 
         int selectedIndex=lvListView.getSelectionModel().getSelectedIndex();
         if (selectedIndex != -1)
