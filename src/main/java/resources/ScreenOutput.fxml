@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.Button?>
-<AnchorPane  fx:controller="server.ScreenOutput"  prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <Label fx:id="contentLabel" layoutX="47.0" layoutY="130.0" text="" />
+<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.ScreenOutput">
+    <Label fx:id="contentLabel" layoutX="47.0" layoutY="130.0" prefHeight="263.0" prefWidth="866.0" text="" />
 
 </AnchorPane>

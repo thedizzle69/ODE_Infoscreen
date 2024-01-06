@@ -40,9 +40,24 @@ public class ServerController {
 
 
     private ScreenOutput screenOutput;
+    public ServerController() {
+        this.screenOutput = new ScreenOutput(); // Initialize once
+    }
 
     @FXML
     public void handleDisplayContent() {
+
+        if (screenOutput != null) {
+            String content = getContentFromClient();
+            screenOutput.displayContent(content);
+        } else {
+            System.err.println("screenOutput is null in handleDisplayContent");
+        }
+    }
+    public void setScreenOutput(ScreenOutput screenOutput) {
+        this.screenOutput = screenOutput;
+    }
+
 
         if (screenOutput == null) {
             screenOutput = new ScreenOutput();
@@ -55,6 +70,7 @@ public class ServerController {
         if (selectedIndex != -1)
         {
             items.remove(selectedIndex);
+
 
             tfLogField.appendText("\nDisplaying Element index:n"+selectedIndex);
         }
@@ -96,8 +112,6 @@ public class ServerController {
 
     // Method to get content from the client, to be implemented as per your application logic
     private String getContentFromClient() {
-        // Return the content received from the client
-        // This is just a placeholder, you will need to implement the logic to retrieve actual content
         return "Content from client";
     }
 
