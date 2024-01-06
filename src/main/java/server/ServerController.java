@@ -30,17 +30,22 @@ public class ServerController {
 
 
     private ScreenOutput screenOutput;
+    public ServerController() {
+        this.screenOutput = new ScreenOutput(); // Initialize once
+    }
 
     @FXML
     public void handleDisplayContent() {
-        if (screenOutput == null) {
-            screenOutput = new ScreenOutput();
+        if (screenOutput != null) {
+            String content = getContentFromClient();
+            screenOutput.displayContent(content);
+        } else {
+            System.err.println("screenOutput is null in handleDisplayContent");
         }
-        // You need to implement how to get the content from the client
-        String content = getContentFromClient();
-        screenOutput.displayContent(content);
     }
-
+    public void setScreenOutput(ScreenOutput screenOutput) {
+        this.screenOutput = screenOutput;
+    }
 
 
     public void updateListView(ObservableList<String> contentList)
@@ -59,8 +64,6 @@ public class ServerController {
 
     // Method to get content from the client, to be implemented as per your application logic
     private String getContentFromClient() {
-        // Return the content received from the client
-        // This is just a placeholder, you will need to implement the logic to retrieve actual content
         return "Content from client";
     }
 }

@@ -30,6 +30,7 @@ public class ServerApp extends Application {
     public String getLogMessages() {
         return logMessages;
     }
+    private ScreenOutput screenOutput;
 
     public static void main(String[] args) {
         launch(args);
@@ -40,6 +41,7 @@ public class ServerApp extends Application {
     @Override
     public void start(Stage primaryStage) {
 
+        screenOutput = new ScreenOutput();
 
 
         logMessages= " Loading main frame...\n";
@@ -55,10 +57,11 @@ public class ServerApp extends Application {
             primaryStage.setScene(new Scene(root, 600,400));
             primaryStage.show();
             myController= loader.getController();
+            myController.setScreenOutput(screenOutput); //
 
 
 
-                   } catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("Loader Failed");
             throw new RuntimeException(e);
 
@@ -98,7 +101,6 @@ public class ServerApp extends Application {
 
 
 
-    // Somewhere in your ServerApp class, declare the ScreenOutput instance
 
     @Override
     public void stop() {
@@ -120,7 +122,6 @@ public class ServerApp extends Application {
     }
 
 
-    private ScreenOutput screenOutput;
 
 
 
@@ -140,7 +141,8 @@ public class ServerApp extends Application {
                 //String processedContent = ContentProcessor.processContent(receivedContent);
                 //screenOutput.displayContent(processedContent); // Call the instance method
 
-
+            String contentToShow = receivedContent.getData();
+            Platform.runLater(() -> screenOutput.displayContent(contentToShow));
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
