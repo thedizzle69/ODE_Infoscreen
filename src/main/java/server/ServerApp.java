@@ -69,8 +69,11 @@ public class ServerApp extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        screenOutput = new ScreenOutput();
 
+        // Check JavaFX version
+        System.out.println("JavaFX Runtime Version: " + System.getProperties().getProperty("javafx.runtime.version"));
+
+        screenOutput = new ScreenOutput();
 
         logMessages= " Loading main frame...\n";
 
@@ -86,7 +89,7 @@ public class ServerApp extends Application {
             primaryStage.show();
             myController= loader.getController();
 
-            myController.setScreenOutput(screenOutput); //
+           // myController.setScreenOutput(screenOutput); //
 
 
             myController.setObservable(contentList);
