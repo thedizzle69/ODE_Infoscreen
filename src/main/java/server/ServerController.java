@@ -83,7 +83,7 @@ public class ServerController {
      * @param text The text to be set in the log text area.
      */
     public void setTextInTextArea(String text) {
-    tfLogField.setText(text);
+        tfLogField.setText(text);
     }
 
     /**
