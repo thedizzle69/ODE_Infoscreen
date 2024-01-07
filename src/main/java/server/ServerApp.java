@@ -41,7 +41,7 @@ public class ServerApp extends Application {
 
     private ServerController myController= null;
 
-    ObservableList<String> contentList =FXCollections.observableArrayList();
+    ObservableList<Content> contentList =FXCollections.observableArrayList();
 
     private  String logMessages;
 
@@ -178,7 +178,7 @@ public class ServerApp extends Application {
 
 
             Platform.runLater(() -> {
-                contentList.add(receivedContent.toString());
+                contentList.add(receivedContent);
                 myController.updateListView(contentList);
             });
 

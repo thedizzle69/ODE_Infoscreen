@@ -28,12 +28,23 @@ public class GUIController {
     @FXML
     private Button uploadImageButton;
 
+    private Content content= null;
+
     @FXML
     public void initialize() {
         sendButton.setOnAction(event -> {
             String contentData = contentTextArea.getText();
             byte[] imageBytes = extractImageBytes();
-            Content content = new Content(ContentType.TEXT, contentData, imageBytes);
+
+            if(imageView.getImage()== null)
+            {
+                content = new Content(ContentType.TEXT, contentData, imageBytes);
+            }
+            else if (imageView.getImage()!=null)
+            {
+                content = new Content(ContentType.IMAGE, contentData, imageBytes);
+            }
+
             ContentSender.sendContent(content);
             clearInput();
         });
@@ -48,6 +59,7 @@ public class GUIController {
             if (selectedFile != null) {
                 Image image = new Image(selectedFile.toURI().toString());
                 imageView.setImage(image);
+
             }
         });
     }

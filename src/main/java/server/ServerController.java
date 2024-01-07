@@ -25,7 +25,7 @@ public class ServerController {
     private Label dynamicInfoLabel;
 
     @FXML
-    private ListView<String> lvListView= new ListView<>();;
+    private ListView<Content> lvListView= new ListView<>();;
 
     @FXML
     private BorderPane root;
@@ -36,7 +36,7 @@ public class ServerController {
     @FXML
     private TextArea tfLogField;
 
-    private ObservableList<String> items=null;
+    private ObservableList<Content> items=null;
 
 
     private ScreenOutput screenOutput;
@@ -49,11 +49,14 @@ public class ServerController {
         }
         // You need to implement how to get the content from the client
         String content = getContentFromClient();
-        screenOutput.displayContent(lvListView.getSelectionModel().getSelectedItem());
+
 
         int selectedIndex=lvListView.getSelectionModel().getSelectedIndex();
         if (selectedIndex != -1)
         {
+           ScreenOutput output= new ScreenOutput();
+           output.displayContent(items.get(selectedIndex));
+
             items.remove(selectedIndex);
 
             tfLogField.appendText("\nDisplaying Element index:n"+selectedIndex);
@@ -68,7 +71,7 @@ public class ServerController {
      *
      * @param contentList The content list to be displayed in the list view.
      */
-    public void updateListView(ObservableList<String> contentList)
+    public void updateListView(ObservableList<Content> contentList)
     {
         lvListView.setItems(contentList);
 
@@ -88,7 +91,7 @@ public class ServerController {
      *
      * @param items The observable list to be set.
      */
-    public void setObservable(ObservableList<String> items)
+    public void setObservable(ObservableList<Content> items)
     {
         this.items=items;
 
