@@ -191,10 +191,10 @@ public class ServerApp extends Application {
             });
 
 
-                //screenOutput.displayContent(processedContent); // Call the instance method
 
-            String contentToShow = receivedContent.getData();
-            Platform.runLater(() -> screenOutput.displayContent(contentToShow));
+
+
+
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
