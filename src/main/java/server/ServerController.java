@@ -56,7 +56,6 @@ public class ServerController {
         {
            ScreenOutput output= new ScreenOutput();
            output.displayContent(items.get(selectedIndex));
-
             items.remove(selectedIndex);
 
             tfLogField.appendText("\nDisplaying Element index:n"+selectedIndex);

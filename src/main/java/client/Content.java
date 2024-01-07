@@ -17,12 +17,8 @@ public record Content(ContentType contentType, String textContent, byte[] imageC
         if (contentType == ContentType.TEXT) {
             return textContent;
         } else if (contentType == ContentType.IMAGE) {
-            try {
-                System.out.println("returning Picture");
-                return ImageIO.read(new ByteArrayInputStream(imageContent));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            System.out.println("returning Picture");
+            return imageContent;
         } else {
             return "Unknown Content Type";
         }

@@ -15,6 +15,8 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import resources.ContentType;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.file.FileSystems;
@@ -68,27 +70,40 @@ public class ScreenOutput {
 
 
     public void displayContent(Content content) {
-        Platform.runLater(() -> {
+
             if(content.getData() instanceof String)
             {
                 System.out.println(content.getData().toString());
-            contentLabel.setText(content.getData().toString());
 
-            } else if (content.getData() instanceof Image) {
-              
+                Platform.runLater(() -> {
+            contentLabel.setText(content.getData().toString());});
+
+            } else if (content.getData() instanceof byte[]) {
+
+                byte[] receivedArray=(byte[])content.getData();
+
+                Image image= new Image(new ByteArrayInputStream(receivedArray));
+                if(image==null)
+                System.out.println("image is null");
+
+                Platform.runLater(() -> {
+                IvImageView.setImage(image);});
 
 
-                Image image = (Image) content.getData(); // Cast the data to Image
-                IvImageView.setImage(image);
+
+
+               // Image image = (Image) content.getData(); // Cast the data to Image
+                //IvImageView.setImage(image);
 
             }
 
 
-        });
+
 
         stage.show(); // Show the stage when content is updated
 
     }
+
 
     private void displayImage(String imageArray) {
         byte[] imageBytes = parseImageArray(imageArray);

@@ -130,6 +130,7 @@ public class ServerApp extends Application {
 
 
             } catch (IOException e) {
+                if (!serverSocket.isClosed())
                 throw new RuntimeException(e);
             }
 
@@ -191,12 +192,12 @@ public class ServerApp extends Application {
             });
 
 
-
-
-
-
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
     }
+
+
+
+
 }
