@@ -68,7 +68,7 @@ public class ServerController {
 
     /**
      * Updates the list view with the provided content list.
-     *
+     *s
      * @param contentList The content list to be displayed in the list view.
      */
     public void updateListView(ObservableList<Content> contentList)
