@@ -31,8 +31,6 @@ public class ScreenOutput {
     @FXML
     private Label contentLabel;
 
-    @FXML
-    private ImageView imageView;
 
     private Stage stage;
 
@@ -79,22 +77,10 @@ public class ScreenOutput {
             contentLabel.setText(content.getData().toString());});
 
             } else if (content.getData() instanceof byte[]) {
-
                 byte[] receivedArray=(byte[])content.getData();
 
-                Image image= new Image(new ByteArrayInputStream(receivedArray));
-                if(image==null)
-                System.out.println("image is null");
-
-                Platform.runLater(() -> {
-                IvImageView.setImage(image);});
-
-
-
-
-               // Image image = (Image) content.getData(); // Cast the data to Image
-                //IvImageView.setImage(image);
-
+                displayImage(Arrays.toString(receivedArray));
+                //todo implement display
             }
 
 
@@ -106,11 +92,15 @@ public class ScreenOutput {
 
 
     private void displayImage(String imageArray) {
+
+        System.out.println(imageArray);
         byte[] imageBytes = parseImageArray(imageArray);
 
         if (imageBytes != null) {
             Image image = new Image(new ByteArrayInputStream(imageBytes));
-            imageView.setImage(image);
+            Platform.runLater(() -> {
+                IvImageView.setImage(image);
+            });
         }
     }
 
