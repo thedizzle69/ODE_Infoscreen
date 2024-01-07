@@ -14,6 +14,7 @@ import javafx.stage.FileChooser;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.Arrays;
 
 public class GUIController {
     @FXML
@@ -34,7 +35,7 @@ public class GUIController {
     public void initialize() {
         sendButton.setOnAction(event -> {
             String contentData = contentTextArea.getText();
-            byte[] imageBytes = extractImageBytes();
+            byte[] imageBytes= null;
 
             if(imageView.getImage()== null)
             {
@@ -42,6 +43,8 @@ public class GUIController {
             }
             else if (imageView.getImage()!=null)
             {
+
+                imageBytes= extractImageBytes();
                 content = new Content(ContentType.IMAGE, contentData, imageBytes);
             }
 
