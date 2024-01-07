@@ -2,22 +2,21 @@
  Main Frame loaded successfully
  Starting Server...
 Server accepted, connected to/127.0.0.1
-Received content from client: asdawdawsd
-Server accepted, connected to/127.0.0.1
-Received content from client: 
-Server accepted, connected to/127.0.0.1
-Received content from client: 
-Server accepted, connected to/127.0.0.1
-Received content from client: asdawdawdaw
-Server accepted, connected to/127.0.0.1
-Received content from client: dasdawdasd
-Server accepted, connected to/127.0.0.1
-Received content from client: 
-Server accepted, connected to/127.0.0.1
-Received content from client: 
 
- Logfile exported...
+Received content from client: sdawdasd
+Server accepted, connected to/127.0.0.1
+Received content from client: javafx.scene.image.Image@e5a034a
+Server accepted, connected to/127.0.0.1
+Received content from client: dawdsawd
+Server accepted, connected to/127.0.0.1
+Received content from client: dasdawd
+Server accepted, connected to/127.0.0.1
+Received content from client: sdsdssd
+Server accepted, connected to/127.0.0.1
+Received content from client: javafx.scene.image.Image@45c83e0d
+Server accepted, connected to/127.0.0.1
+Received content from client: javafx.scene.image.Image@4f3bb80e
 
- Logfile exported...
-
- Logfile exported...
+Displaying Element index:n3
+Displaying Element index:n0
+Displaying Element index:n1
