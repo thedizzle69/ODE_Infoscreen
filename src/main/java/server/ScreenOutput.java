@@ -87,7 +87,6 @@ public class ScreenOutput {
                 System.out.println("image is null");
 
                 Platform.runLater(() -> {
-                    System.out.println("disopadwouedbnuiawbdiabwiudbaiubwuibi!!!!!!!!!!!!!");
                 IvImageView.setImage(image);});
 
 
