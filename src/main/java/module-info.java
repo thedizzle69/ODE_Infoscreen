@@ -8,7 +8,7 @@ module InfoScreen{
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires java.desktop;
-    requires jdk.incubator.foreign;
+    // requires jdk.incubator.foreign;
     //requires javafx.swing;
     //requires com.github.almasb.fxgl;
 

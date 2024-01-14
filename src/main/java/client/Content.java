@@ -34,7 +34,7 @@ public record Content(ContentType contentType, String textContent, byte[] imageC
         }
         else
         {
-            return "Bild erhalten";
+            return "Bild erhalten: " + "Image String" + Arrays.toString(imageContent);
 
 
         }
