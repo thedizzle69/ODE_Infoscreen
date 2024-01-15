@@ -34,4 +34,5 @@ public record Content(Credentials credentials, ContentType contentType, String t
     public Credentials getCredentials() {
         return credentials;
     }
+
 }

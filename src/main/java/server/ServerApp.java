@@ -214,6 +214,18 @@ public class ServerApp extends Application {
 
             Content receivedContent = (Content) inputStream.readObject();
 
+            if (isValidCredentials(receivedContent.getCredentials())) {
+                appendToLog("Credentials valid. Sending confirmation to client...\n");
+                // ObjectOutputStream outputStream = new ObjectOutputStream(ClientSocket.getOutputStream());
+                // outputStream.writeObject("Credentials valid. Sending confirmation to client...\n");
+            } else {
+                appendToLog("Credentials invalid. Sending error message to client...\n");
+                // ObjectOutputStream outputStream = new ObjectOutputStream(ClientSocket.getOutputStream());
+                // outputStream.writeObject("Credentials invalid. Sending error message to client...\n");
+                ClientSocket.close();
+            }
+
+
             appendToLog("Received content from client: " + receivedContent.getData() + "\n");
 
             Platform.runLater(() -> {
