@@ -1,7 +1,5 @@
 package client;
 
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import resources.ContentType;
 
 // import javafx.event.ActionEvent;
@@ -31,33 +29,23 @@ public class GUIController {
     @FXML
     private Button uploadImageButton;
 
-    // Use the usernameField and passwordField from LoginController
-    private TextField usernameField;
-
-    private PasswordField passwordField;
-
-    private Content content = null;
-
-    public void setLoginFields(TextField usernameField, PasswordField passwordField) {
-        this.usernameField = usernameField;
-        this.passwordField = passwordField;
-    }
+    private Content content= null;
 
     @FXML
     public void initialize() {
         sendButton.setOnAction(event -> {
-            String username = usernameField.getText();
-            String password = passwordField.getText();
             String contentData = contentTextArea.getText();
+            byte[] imageBytes= null;
 
-            byte[] imageBytes = null;
+            if(imageView.getImage()== null)
+            {
+                content = new Content(ContentType.TEXT, contentData, imageBytes);
+            }
+            else if (imageView.getImage()!=null)
+            {
 
-            if (imageView.getImage() == null) {
-                content = new Content(ContentType.TEXT, contentData, imageBytes, username, password);
-            } else if (imageView.getImage() != null) {
-
-                imageBytes = extractImageBytes();
-                content = new Content(ContentType.IMAGE, contentData, imageBytes, username, password);
+                imageBytes= extractImageBytes();
+                content = new Content(ContentType.IMAGE, contentData, imageBytes);
             }
 
             ContentSender.sendContent(content);

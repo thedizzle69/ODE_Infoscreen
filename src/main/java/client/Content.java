@@ -9,9 +9,11 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Arrays;
 
-public record Content(ContentType contentType, String textContent, byte[] imageContent, String username, String password) implements Serializable {
+public record Content(ContentType contentType, String textContent, byte[] imageContent) implements Serializable {
+
 
     public Object getData() {
+
         if (contentType == ContentType.TEXT) {
             return textContent;
         } else if (contentType == ContentType.IMAGE) {
@@ -22,12 +24,19 @@ public record Content(ContentType contentType, String textContent, byte[] imageC
         }
     }
 
+
     @Override
     public String toString() {
-        if (contentType == ContentType.TEXT) {
-            return "Text erhalten by:" + username + ": " + textContent;
-        } else {
-            return "Bild erhalten by " + username + ": " + Arrays.toString(imageContent);
+
+        if(contentType==ContentType.TEXT) {
+            return "Text erhalten:" + textContent;
+
+        }
+        else
+        {
+            return "Bild erhalten";
+
+
         }
     }
 }

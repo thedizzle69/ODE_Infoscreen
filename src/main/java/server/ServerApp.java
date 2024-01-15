@@ -89,7 +89,7 @@ public class ServerApp extends Application {
             primaryStage.show();
             myController= loader.getController();
 
-           // myController.setScreenOutput(screenOutput); //
+            // myController.setScreenOutput(screenOutput); //
 
 
             myController.setObservable(contentList);
@@ -131,7 +131,7 @@ public class ServerApp extends Application {
 
             } catch (IOException e) {
                 if (!serverSocket.isClosed())
-                throw new RuntimeException(e);
+                    throw new RuntimeException(e);
             }
 
         }).start();
@@ -179,29 +179,12 @@ public class ServerApp extends Application {
      * updates the JavaFX `ListView` with the received content, and displays log messages.
      */
     private void processClientContent()
-        {
+    {
         try {
             ObjectInputStream inputStream = new ObjectInputStream(ClientSocket.getInputStream());
             Content receivedContent = (Content) inputStream.readObject();
+            appendToLog("Received content from client: " + receivedContent.getData() +"\n");
 
-            //String for credentials
-
-            String[] parts = receivedContent.getData().toString().split(",");
-            String username = parts[0];
-            String password = parts[1];
-
-            System.out.println("Trying authentication with username " + username + " and password " + password);
-
-
-            if (isValidServerCredentials(username, password)) {
-                System.out.println("Authentification successful. Hello " + parts[2]);
-                appendToLog("Authentication successful. Hello " + parts[2] + "\n");
-                appendToLog("Received content from client: " + receivedContent.getData() +"\n");
-            }
-            else {
-                System.out.println("Authentification failed.");
-                appendToLog("Authentification failed.\n");
-            }
 
             Platform.runLater(() -> {
                 contentList.add(receivedContent);
@@ -214,23 +197,7 @@ public class ServerApp extends Application {
         }
     }
 
-private boolean isValidServerCredentials(String username, String password) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/resources/server_credentials.csv"))) {
-            // Skip the header row
-            reader.readLine();
 
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length == 3 && parts[0].equals(username) && parts[1].equals(password)) {
-                    return true;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
 
 
 }

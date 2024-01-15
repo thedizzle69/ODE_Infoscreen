@@ -16,10 +16,6 @@ public class ClientApp extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-
-        // Check JavaFX version
-        System.out.println("JavaFX Runtime Version: " + System.getProperties().getProperty("javafx.runtime.version"));
-
         System.out.println("Hello There...");
 
         LoginController loginController = openLoginScreen(primaryStage);
