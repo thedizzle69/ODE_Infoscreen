@@ -10,4 +10,12 @@ public record Credentials(String username, String password) implements Serializa
     public static Credentials getCredentials() {
         return null;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }

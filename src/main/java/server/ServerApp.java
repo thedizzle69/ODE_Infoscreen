@@ -20,6 +20,7 @@
 package server;
 
 import client.Content;
+import client.Credentials;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -183,6 +184,7 @@ public class ServerApp extends Application {
         try {
             ObjectInputStream inputStream = new ObjectInputStream(ClientSocket.getInputStream());
             Content receivedContent = (Content) inputStream.readObject();
+
             appendToLog("Received content from client: " + receivedContent.getData() +"\n");
 
 
@@ -197,6 +199,27 @@ public class ServerApp extends Application {
         }
     }
 
+    // Function to check credentials
+
+    private boolean isValidCredentials(Credentials receivedCredentials) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/resources/server_credentials.csv"))) {
+            // Skip the header row
+            reader.readLine();
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 3 && parts[0].equals(receivedCredentials.getUsername()) && parts[1].equals(receivedCredentials.getPassword())) {
+                    System.out.println("Credentials valid. Received from client: " + parts[2]);
+                    appendToLog("Credentials valid. Received from client: " + parts[2] + "\n");
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 
 
