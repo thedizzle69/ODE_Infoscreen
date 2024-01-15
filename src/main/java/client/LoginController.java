@@ -44,7 +44,7 @@ public class LoginController {
 
             System.out.println("Login successful. Trying to load MainApplication...");
 
-            ClientApp.openMainApp(primaryStage);
+            ClientApp.openMainApp(primaryStage, credentials);
 
         } else {
             System.out.println("Login failed.");

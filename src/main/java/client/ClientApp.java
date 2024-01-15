@@ -84,7 +84,7 @@ public class ClientApp extends Application {
         }*/ //commented out as running together with Thread.sleep(3000) above
     }
 
-    public static void openMainApp(Stage primaryStage) {
+    public static void openMainApp(Stage primaryStage, Credentials credentials) {
 
         // System.out.println("Fetching GUI.fxml");
 
