@@ -25,21 +25,19 @@
     <dependencies>
         <!-- Other dependencies -->
 
-
         <!-- JavaFX Web -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-web</artifactId>
-            <version>17.0.6</version>
+            <version>${javafx.version}</version>
         </dependency>
 
-         <!-- JavaFX -->
+        <!-- JavaFX Controls -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>17.0.6</version>
+            <version>${javafx.version}</version>
         </dependency>
-        <!-- Add other JavaFX dependencies if needed -->
 
         <!-- ControlsFX -->
         <dependency>
@@ -107,44 +105,71 @@
 
     <build>
         <plugins>
+            <!-- ... other plugins ... -->
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                    <source>17</source>
-                    <target>17</target>
+                    <release>17</release>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <executions>
+                    <!-- Client Application -->
                     <execution>
                         <id>client-app</id>
                         <configuration>
+                            <javafxVersion>${17.0.6}</javafxVersion>
                             <mainClass>client.ClientApp</mainClass>
+                            <launcher>client</launcher>
+                            <options>
+                                <option>--module-path=${project.build.directory}/classes</option>
+                                <option>--add-modules</option>
+                                <option>InfoScreen</option> <!-- Replace 'Infoscreen' with your actual module name -->
+                            </options>
+                            <javafxVersion>${javafx.version}</javafxVersion>
                         </configuration>
                     </execution>
+
+                    <!-- Server Application -->
                     <execution>
                         <id>server-app</id>
                         <configuration>
+                            <javafxVersion>${javafx.version}</javafxVersion>
                             <mainClass>server.ServerApp</mainClass>
+                            <launcher>server</launcher>
+                            <options>
+                                <option>--module-path=${project.build.directory}/src/main/java</option>
+                                <option>--add-modules</option>
+                                <option>InfoScreen</option> <!-- Replace 'Infoscreen' with your actual module name -->
+                            </options>
+
                         </configuration>
                     </execution>
 
-                    <!-- Add a new execution for testing -->
+                    <!-- Testing -->
                     <execution>
                         <id>test-jfx</id>
                         <configuration>
+                            <javafxVersion>${javafx.version}</javafxVersion>
                             <mainClass>org.junit.platform.console.ConsoleLauncher</mainClass>
+                            <launcher>test-jfx</launcher>
+                            <options>
+                                <option>--module-path=${project.build.directory}/classes</option>
+                                <option>--add-modules</option>
+                                <option>InfoScreen</option> <!-- Replace 'Infoscreen' with your actual module name -->
+                            </options>
+                            <javafxVersion>${javafx.version}</javafxVersion>
                         </configuration>
                     </execution>
-
                 </executions>
             </plugin>
         </plugins>
     </build>
-
 </project>

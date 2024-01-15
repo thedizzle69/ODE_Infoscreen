@@ -5,6 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class LoginController {
 
     boolean loginSuccessful = false;
@@ -63,10 +67,26 @@ public class LoginController {
     }
 
     private boolean isValidCredentials(String username, String password) {
-        // For demonstration purposes, hardcoding valid credentials
-        return ("admin".equals(username) && "adminkey".equals(password)) ||
-                ("user".equals(username) && "userkey".equals(password));
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/resources/client_credentials.csv"))) {
+            // Skip the header row
+            reader.readLine();
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 3 && parts[0].equals(username) && parts[1].equals(password)) {
+                    System.out.println("Login successful. Hello " + parts[2]);
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Login failed.");
+        showAlert();
+        return false;
     }
+
 
 
   /*  private void openMainApp(Window window) {
