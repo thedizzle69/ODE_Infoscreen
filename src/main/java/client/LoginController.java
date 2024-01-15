@@ -36,7 +36,11 @@ public class LoginController {
         String password = passwordField.getText();
 
         if (isValidCredentials(username, password)) {
+
             loginSuccessful = true;
+
+            // Storing the credentials in the Credentials class
+            Credentials credentials = new Credentials(username, password);
 
             System.out.println("Login successful. Trying to load MainApplication...");
 
