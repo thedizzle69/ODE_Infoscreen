@@ -22,13 +22,13 @@ public class LoginController {
     @FXML
     private Button loginButton;
 
-
     private Stage primaryStage;
 
     // Add this method to set the primaryStage
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
+
 
     @FXML
     public void loginButtonClicked() {
@@ -41,6 +41,9 @@ public class LoginController {
 
             // Storing the credentials in the Credentials class
             Credentials credentials = new Credentials(username, password);
+            Credentials.setCredentials(credentials);
+
+            System.out.println("Credentials used: " + credentials);
 
             System.out.println("Login successful. Trying to load MainApplication...");
 

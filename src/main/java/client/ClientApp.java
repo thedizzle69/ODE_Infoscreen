@@ -86,24 +86,40 @@ public class ClientApp extends Application {
 
     public static void openMainApp(Stage primaryStage, Credentials credentials) {
 
-        // System.out.println("Fetching GUI.fxml");
-
         String fxmlPath = "src/main/java/resources/GUI.fxml";
 
         // Resolve the path to the FXML file
         Path path = FileSystems.getDefault().getPath(fxmlPath);
 
+        //Check if credentials are set
+        if (credentials == null) {
+            System.out.println("Credentials are null");
+            return;
+        } else {
+            System.out.println("Credentials are: " + credentials );
+        }
+
         try {
             // Load FXML file directly from the file system
-            Parent root = FXMLLoader.load(path.toUri().toURL());
+            FXMLLoader loader = new FXMLLoader(path.toUri().toURL());
+            Parent root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Client App");
+
+            // Pass primaryStage to the controller and check credentials
+            // System.out.println("The credentials are still: " + credentials);
+            GUIController guiController = loader.getController();
+            guiController.setPrimaryStage(primaryStage);
+            guiController.setCredentials(credentials);
+
             primaryStage.show();
+
         } catch (IOException e) {
             System.err.println("Error loading FXML file: " + fxmlPath);
             e.printStackTrace();
         }
+
     }
 
     private void printf(String s) {
