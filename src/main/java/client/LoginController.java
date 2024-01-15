@@ -76,7 +76,7 @@ public class LoginController {
                     System.out.println("Credentials valid. Hello " + parts[2]);
 
                     //Show hello Message on screen
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Hello " + parts[2] + "!", ButtonType.OK);
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Hello " + parts[2] + "!\n\n" + "Please press the OK button to enter the Application.", ButtonType.OK);
                     alert.setTitle("Credentials Valid!");
                     alert.showAndWait();
 

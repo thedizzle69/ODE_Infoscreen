@@ -33,8 +33,8 @@ public class ClientApp extends Application {
 
         // assert loginController != null; commented out as not working correctly
 
-        if (loginController != null) {
-            System.out.println("loginController is not null");
+        if (loginController == null) {
+            System.out.println("loginController is null");
 
             /* if (loginController.loginSuccessful) {
                 System.out.println("Login successful. Trying to load MainApplication...");
@@ -42,14 +42,12 @@ public class ClientApp extends Application {
             } else {
                 System.out.println("Login unsuccessful.");
             }*/ // commented out as not working correctly
-        } else {
-            System.out.println("loginController is null.");
         }
     }
 
     private LoginController openLoginScreen(Stage primaryStage) {
 
-        System.out.println("Fetching LoginController.fxml");
+        // System.out.println("Fetching LoginController.fxml");
 
         String fxmlPath = "src/main/java/resources/LoginController.fxml";
 
@@ -62,7 +60,7 @@ public class ClientApp extends Application {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
-            primaryStage.setTitle("Login");
+            primaryStage.setTitle("Login.");
 
             // Pass primaryStage to the controller
             LoginController loginController = loader.getController();
@@ -70,9 +68,9 @@ public class ClientApp extends Application {
 
             primaryStage.show();
 
-            System.out.println("Fetched and will return in 3 seconds");
+            // System.out.println("Fetched and will return in 3 seconds");
 
-            Thread.sleep(3000);
+            // Thread.sleep(3000);
 
             return loginController;
 
@@ -81,14 +79,14 @@ public class ClientApp extends Application {
         } catch (IOException e) {
             e.printStackTrace();
             return null;
-        } catch (InterruptedException e) {
+        } /* catch (InterruptedException e) {
             throw new RuntimeException(e);
-        }
+        }*/ //commented out as running together with Thread.sleep(3000) above
     }
 
     public static void openMainApp(Stage primaryStage) {
 
-        System.out.println("Fetching GUI.fxml");
+        // System.out.println("Fetching GUI.fxml");
 
         String fxmlPath = "src/main/java/resources/GUI.fxml";
 
