@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Arrays;
 
-public record Content(ContentType contentType, String textContent, byte[] imageContent) implements Serializable {
+public record Content(Credentials credentials, ContentType contentType, String textContent, byte[] imageContent) implements Serializable {
 
 
     public Object getData() {
@@ -27,16 +27,7 @@ public record Content(ContentType contentType, String textContent, byte[] imageC
 
     @Override
     public String toString() {
-
-        if(contentType==ContentType.TEXT) {
-            return "Text erhalten:" + textContent;
-
-        }
-        else
-        {
-            return "Bild erhalten";
-
-
-        }
+        // include credentials in the toString representation
+        return "Credentials: " + credentials + ", Content: " + getData();
     }
 }
