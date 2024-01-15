@@ -40,6 +40,10 @@ public class LoginController {
 
             System.out.println("Login successful.");
 
+            // Create GUIController
+            GUIController guiController = new GUIController();
+            guiController.setLoginFields(usernameField, passwordField);
+
             ClientApp.openMainApp(primaryStage);
 
         }
