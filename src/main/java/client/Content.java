@@ -30,4 +30,8 @@ public record Content(Credentials credentials, ContentType contentType, String t
         // include credentials in the toString representation
         return "Credentials: " + credentials + ", Content: " + getData();
     }
+
+    public Credentials getCredentials() {
+        return credentials;
+    }
 }

@@ -124,15 +124,36 @@ public class ServerApp extends Application {
 
                 while(true)
                 {
+
                     ClientSocket = serverSocket.accept();
-                    appendToLog("Server accepted, connected to" + ClientSocket.getInetAddress()+ "\n");
-                    new Thread(() -> processClientContent()).start();
+                    appendToLog("Incoming request from " + ClientSocket.getInetAddress() + "\nChecking Credentials...\n");
+
+                    //Checking Credentials
+                    ObjectInputStream inputStream = new ObjectInputStream(ClientSocket.getInputStream());
+                    Content receivedContent = (Content) inputStream.readObject();
+
+                    if (isValidCredentials(receivedContent.getCredentials())) {
+                        appendToLog("Credentials valid. Sending confirmation to client...\n");
+                        ObjectOutputStream outputStream = new ObjectOutputStream(ClientSocket.getOutputStream());
+                        outputStream.writeObject("Credentials valid. Sending confirmation to client...\n");
+
+                        new Thread(() -> processClientContent()).start();
+
+                    } else {
+                        appendToLog("Credentials invalid. Sending error message to client...\n");
+                        ObjectOutputStream outputStream = new ObjectOutputStream(ClientSocket.getOutputStream());
+                        outputStream.writeObject("Credentials invalid. Sending error message to client...\n");
+                        ClientSocket.close();
+                    }
+
                 }
 
 
             } catch (IOException e) {
                 if (!serverSocket.isClosed())
                     throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
             }
 
         }).start();
@@ -210,8 +231,8 @@ public class ServerApp extends Application {
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
                 if (parts.length == 3 && parts[0].equals(receivedCredentials.getUsername()) && parts[1].equals(receivedCredentials.getPassword())) {
-                    System.out.println("Credentials valid. Received from client: " + parts[2]);
-                    appendToLog("Credentials valid. Received from client: " + parts[2] + "\n");
+                    System.out.println("Connected user: " + parts[2]);
+                    appendToLog("Connected user: " + parts[2] + "\n");
                     return true;
                 }
             }
