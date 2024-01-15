@@ -126,9 +126,8 @@ public class ServerApp extends Application {
                 {
 
                     ClientSocket = serverSocket.accept();
-                    appendToLog("Incoming request from " + ClientSocket.getInetAddress());
+                    appendToLog("Incoming request from " + ClientSocket.getInetAddress() + "\nChecking Credentials...\n");
 
-                    /*
                     //Checking Credentials
                     ObjectInputStream inputStream = new ObjectInputStream(ClientSocket.getInputStream());
                     Content receivedContent = (Content) inputStream.readObject();
@@ -141,24 +140,24 @@ public class ServerApp extends Application {
 
                         System.out.println ("Trying to process content from client...\n");
                         System.out.println("Content data: " + receivedContent.getData() + "\n");
-*/
-                        new Thread(() -> processClientContent()).start();
 
-                    /* }  else {
+                        new Thread(() -> processClientContent(inputStream)).start();
+
+                    } else {
                         appendToLog("Credentials invalid. Sending error message to client...\n");
                         // ObjectOutputStream outputStream = new ObjectOutputStream(ClientSocket.getOutputStream());
                         // outputStream.writeObject("Credentials invalid. Sending error message to client...\n");
                         ClientSocket.close();
-                    }*/
+                    }
 
                 }
 
             } catch (IOException e) {
                 if (!serverSocket.isClosed())
                     throw new RuntimeException(e);
-            }/* catch (ClassNotFoundException e) {
+            } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
-            }*/
+            }
 
         }).start();
     }
@@ -204,32 +203,28 @@ public class ServerApp extends Application {
      * Processes content received from a connected client. It deserializes the content,
      * updates the JavaFX `ListView` with the received content, and displays log messages.
      */
-    private void processClientContent() {
+    private void processClientContent(ObjectInputStream inputStream)
+    {
         try {
-            System.out.println("Trying to process content from client...\n");
+
+            System.out.println ("Trying to process content from client...\n");
             appendToLog("Trying to process content from client...\n");
 
+            Content processedContent = (Content) inputStream.readObject();
 
-            ObjectInputStream inputStream = new ObjectInputStream(ClientSocket.getInputStream());
+            appendToLog("Received content from client: " + processedContent.getData() +"\n");
 
-            Content receivedContent = (Content) inputStream.readObject();
-
-            appendToLog("Received content from client: " + receivedContent.getData() + "\n");
 
             Platform.runLater(() -> {
-                contentList.add(receivedContent);
+                contentList.add(processedContent);
                 myController.updateListView(contentList);
             });
 
-        } catch (EOFException e) {
-            // Handle the case where the client closed the connection
-            System.err.println("Client closed the connection unexpectedly.");
-            e.printStackTrace();
+
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
     }
-
 
     // Function to check credentials
 
