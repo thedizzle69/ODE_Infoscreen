@@ -126,35 +126,39 @@ public class ServerApp extends Application {
                 {
 
                     ClientSocket = serverSocket.accept();
-                    appendToLog("Incoming request from " + ClientSocket.getInetAddress() + "\nChecking Credentials...\n");
+                    appendToLog("Incoming request from " + ClientSocket.getInetAddress());
 
+                    /*
                     //Checking Credentials
                     ObjectInputStream inputStream = new ObjectInputStream(ClientSocket.getInputStream());
                     Content receivedContent = (Content) inputStream.readObject();
 
                     if (isValidCredentials(receivedContent.getCredentials())) {
                         appendToLog("Credentials valid. Sending confirmation to client...\n");
-                        ObjectOutputStream outputStream = new ObjectOutputStream(ClientSocket.getOutputStream());
-                        outputStream.writeObject("Credentials valid. Sending confirmation to client...\n");
+                        // ObjectOutputStream outputStream = new ObjectOutputStream(ClientSocket.getOutputStream());
+                        // outputStream.writeObject("Credentials valid. Sending confirmation to client...\n");
 
+
+                        System.out.println ("Trying to process content from client...\n");
+                        System.out.println("Content data: " + receivedContent.getData() + "\n");
+*/
                         new Thread(() -> processClientContent()).start();
 
-                    } else {
+                    /* }  else {
                         appendToLog("Credentials invalid. Sending error message to client...\n");
-                        ObjectOutputStream outputStream = new ObjectOutputStream(ClientSocket.getOutputStream());
-                        outputStream.writeObject("Credentials invalid. Sending error message to client...\n");
+                        // ObjectOutputStream outputStream = new ObjectOutputStream(ClientSocket.getOutputStream());
+                        // outputStream.writeObject("Credentials invalid. Sending error message to client...\n");
                         ClientSocket.close();
-                    }
+                    }*/
 
                 }
-
 
             } catch (IOException e) {
                 if (!serverSocket.isClosed())
                     throw new RuntimeException(e);
-            } catch (ClassNotFoundException e) {
+            }/* catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
-            }
+            }*/
 
         }).start();
     }
@@ -200,25 +204,32 @@ public class ServerApp extends Application {
      * Processes content received from a connected client. It deserializes the content,
      * updates the JavaFX `ListView` with the received content, and displays log messages.
      */
-    private void processClientContent()
-    {
+    private void processClientContent() {
         try {
+            System.out.println("Trying to process content from client...\n");
+            appendToLog("Trying to process content from client...\n");
+
+
             ObjectInputStream inputStream = new ObjectInputStream(ClientSocket.getInputStream());
+
             Content receivedContent = (Content) inputStream.readObject();
 
-            appendToLog("Received content from client: " + receivedContent.getData() +"\n");
-
+            appendToLog("Received content from client: " + receivedContent.getData() + "\n");
 
             Platform.runLater(() -> {
                 contentList.add(receivedContent);
                 myController.updateListView(contentList);
             });
 
-
+        } catch (EOFException e) {
+            // Handle the case where the client closed the connection
+            System.err.println("Client closed the connection unexpectedly.");
+            e.printStackTrace();
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
     }
+
 
     // Function to check credentials
 
