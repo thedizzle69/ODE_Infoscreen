@@ -23,6 +23,10 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.Arrays;
 
+/**
+ * The `ScreenOutput` class handles the graphical display of content in a JavaFX application.
+ * It is designed to show different types of content, including text and images, within the GUI.
+ */
 public class ScreenOutput {
 
     @FXML
@@ -34,12 +38,20 @@ public class ScreenOutput {
 
     private Stage stage;
 
+
+
+    /**
+     * Constructor for ScreenOutput. Initializes the primary stage and sets up the GUI.
+     */
     public ScreenOutput() {
         this.stage = new Stage();
         initializeStage();
     }
 
-
+    /**
+     * Initializes the primary stage of the JavaFX application.
+     * Loads the FXML file and sets up the scene for the stage.
+     */
     private void initializeStage() {
         String fxmlPath = "src/main/java/resources/ScreenOutput.fxml";
 
@@ -66,7 +78,12 @@ public class ScreenOutput {
 
     }
 
-
+    /**
+     * Displays content on the GUI. The method determines the type of content (text or image)
+     * and updates the appropriate GUI component.
+     *
+     * @param content The content to be displayed.
+     */
     public void displayContent(Content content) {
 
             if(content.getData() instanceof String)
@@ -90,7 +107,12 @@ public class ScreenOutput {
 
     }
 
-
+    /**
+     * Displays an image on the ImageView. Converts a string representation of an image byte array
+     * into an Image object for display.
+     *
+     * @param imageArray The string representation of the image byte array.
+     */
     private void displayImage(String imageArray) {
 
         System.out.println(imageArray);
@@ -103,7 +125,13 @@ public class ScreenOutput {
             });
         }
     }
-
+    /**
+     * Parses a string representation of an image byte array and returns a byte array.
+     * Used for converting image data into a displayable format.
+     *
+     * @param imageArray The string representation of the image byte array.
+     * @return The parsed byte array of the image.
+     */
     private byte[] parseImageArray(String imageArray) {
         String[] byteValues = imageArray.substring(1, imageArray.length() - 1).split(",");
         byte[] bytes = new byte[byteValues.length];
