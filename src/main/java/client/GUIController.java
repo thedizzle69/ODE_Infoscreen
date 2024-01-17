@@ -15,33 +15,74 @@ import javafx.stage.Stage;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.util.Arrays;
+// import java.util.Arrays;
+
+
+/**
+ * Controller for the client application's graphical user interface.
+ *
+ * @author ditNuts
+ * @version 420.69
+ * @since 2023-12-03
+ */
 
 public class GUIController {
+
+    /**
+     * The text area for the content.
+     */
     @FXML
     private TextArea contentTextArea;
 
+    /**
+     * The image view for the content.
+     */
     @FXML
     private ImageView imageView;
 
+    /**
+     * The send button.
+     */
     @FXML
     private Button sendButton;
 
+    /**
+     * The upload image button.
+     */
     @FXML
     private Button uploadImageButton;
 
+    /**
+     * The content to be sent.
+     */
     private Content content= null;
 
+    /**
+     * The credentials for the client.
+     */
     private Credentials credentials = Credentials.getCredentials();
 
+    /**
+     * The primary stage for the JavaFX application.
+     */
     private Stage primaryStage;
 
+    /**
+     * Sets the primary stage for the JavaFX application.
+     */
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
 
+    /**
+     * Initializes the GUI components and sets up event handlers.
+     */
     @FXML
     public void initialize() {
+
+        /**
+         * Sends the content to the server when the send button is clicked.
+         */
         sendButton.setOnAction(event -> {
             String contentData = contentTextArea.getText();
             byte[] imageBytes= null;
@@ -62,6 +103,9 @@ public class GUIController {
             clearInput();
         });
 
+        /**
+         * Uploads an image when the upload image button is clicked.
+         */
         uploadImageButton.setOnAction(event -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.getExtensionFilters().addAll(
@@ -77,6 +121,11 @@ public class GUIController {
         });
     }
 
+    /**
+     * Extracts the image bytes from the image view.
+     *
+     * @return The image bytes.
+     */
     private byte[] extractImageBytes() {
         if (imageView.getImage() != null) {
             try {
@@ -108,21 +157,35 @@ public class GUIController {
         return null;
     }
 
+    /**
+     * Clears the input fields.
+     */
     private void clearInput() {
         contentTextArea.clear();
         imageView.setImage(null);
     }
 
+    /**
+     * Sends the content to the server when the send button is clicked. (implemented in another way)
+     */
     @FXML
     public void sendButtonClicked() {
         // Implement your logic for the sendButtonClicked event
     }
 
+    /**
+     * Uploads an image when the upload image button is clicked. (implemented in another way)
+     */
     @FXML
     public void uploadImageButtonClicked() {
         // Implement your logic for the uploadImageButtonClicked event
     }
 
+    /**
+     * Sets the credentials for the client.
+     *
+     * @param credentials The credentials to be set.
+     */
     public void setCredentials(Credentials credentials) {
         this.credentials = credentials;
     }
