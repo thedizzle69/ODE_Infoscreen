@@ -11,7 +11,21 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
+
+/**
+ * The main entry point for the client application. Extends JavaFX Application class.
+ *
+ * @author You know who it is.
+ * @version 420.69
+ * @since 2023-12-03
+ */
 public class ClientApp extends Application {
+
+    /**
+     * Entry point for the client application. Initializes the login screen.
+     *
+     * @param primaryStage The primary stage for the JavaFX application.
+     */
 
     @Override
     public void start(Stage primaryStage) {
@@ -44,6 +58,14 @@ public class ClientApp extends Application {
             }*/ // commented out as not working correctly
         }
     }
+
+
+    /**
+     * Opens the login screen and returns the LoginController for further interaction.
+     *
+     * @param primaryStage The primary stage for the JavaFX application.
+     * @return The LoginController instance for login screen interaction.
+     */
 
     private LoginController openLoginScreen(Stage primaryStage) {
 
@@ -84,6 +106,16 @@ public class ClientApp extends Application {
         }*/ //commented out as running together with Thread.sleep(3000) above
     }
 
+
+
+    /**
+     * Opens the main application window if login is successful.
+     *
+     * @param primaryStage The primary stage for the JavaFX application.
+     * @param credentials The user credentials used for login.
+     */
+
+
     public static void openMainApp(Stage primaryStage, Credentials credentials) {
 
         String fxmlPath = "src/main/java/resources/GUI.fxml";
@@ -122,10 +154,17 @@ public class ClientApp extends Application {
 
     }
 
-    private void printf(String s) {
+    /* private void printf(String s) {
         System.out.println(s);
     }
 
+     */
+
+    /**
+     * Main method to launch the client application.
+     *
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         launch(args);
     }

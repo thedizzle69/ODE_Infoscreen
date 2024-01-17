@@ -9,26 +9,58 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Controller for the login screen of the client application.
+ *
+ * @author dizNuts
+ * @version 420.69
+ * @since 2023-12-03
+ */
+
 public class LoginController {
 
+    /**
+     * Indicates whether the login was successful.
+     */
     boolean loginSuccessful = false;
 
+    /**
+     * username field
+     */
     @FXML
     private TextField usernameField;
 
+    /**
+     * password field
+     */
     @FXML
     private PasswordField passwordField;
 
+    /**
+     * login button
+
     @FXML
     private Button loginButton;
+    */
 
+    /**
+     * The primary stage for the JavaFX application.
+     */
     private Stage primaryStage;
+
+    /**
+     * Initializes the GUI components and sets up event handlers.
+     */
 
     // Add this method to set the primaryStage
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
 
+
+    /**
+     * Handles the event when the login button is clicked.
+     */
 
     @FXML
     public void loginButtonClicked() {
@@ -71,6 +103,13 @@ public class LoginController {
 
     }
 
+    /**
+     * Validates the user credentials against a CSV file.
+     *
+     * @param username The entered username.
+     * @param password The entered password.
+     * @return True if the credentials are valid, false otherwise.
+     */
     private boolean isValidCredentials(String username, String password) {
         try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/resources/client_credentials.csv"))) {
             // Skip the header row
@@ -110,6 +149,11 @@ public class LoginController {
 
 
      */
+
+    /**
+     * Shows an alert when the login fails.
+     */
+
     private void showAlert() {
         Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter valid username and password.", ButtonType.OK);
         alert.setTitle("Invalid credentials!");
