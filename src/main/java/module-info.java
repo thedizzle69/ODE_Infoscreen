@@ -1,5 +1,15 @@
 module InfoScreen{
     requires javafx.controls;
+    requires javafx.graphics;
+    requires javafx.base;
+    requires javafx.media;
+    requires javafx.web;
+    requires javafx.controlsEmpty;
+    requires javafx.graphicsEmpty;
+    requires javafx.baseEmpty;
+    requires javafx.mediaEmpty;
+    requires javafx.webEmpty;
+    requires javafx.fxmlEmpty;
     requires org.controlsfx.controls;
     requires javafx.fxml;
     //requires com.dlsc.formsfx.core;
@@ -8,7 +18,7 @@ module InfoScreen{
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires java.desktop;
-    requires jdk.incubator.foreign;
+    // requires jdk.incubator.foreign;
     //requires javafx.swing;
     //requires com.github.almasb.fxgl;
 

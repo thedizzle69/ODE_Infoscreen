@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -31,21 +32,30 @@ public class GUIController {
 
     private Content content= null;
 
+    private Credentials credentials = Credentials.getCredentials();
+
+    private Stage primaryStage;
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
+
     @FXML
     public void initialize() {
         sendButton.setOnAction(event -> {
             String contentData = contentTextArea.getText();
             byte[] imageBytes= null;
 
+            System.out.println("Credentials for Server Authentification are: " + credentials);
+
             if(imageView.getImage()== null)
             {
-                content = new Content(ContentType.TEXT, contentData, imageBytes);
+                content = new Content(credentials, ContentType.TEXT, contentData, imageBytes);
             }
             else if (imageView.getImage()!=null)
             {
-
                 imageBytes= extractImageBytes();
-                content = new Content(ContentType.IMAGE, contentData, imageBytes);
+                content = new Content(credentials, ContentType.IMAGE, contentData, imageBytes);
             }
 
             ContentSender.sendContent(content);
@@ -111,5 +121,9 @@ public class GUIController {
     @FXML
     public void uploadImageButtonClicked() {
         // Implement your logic for the uploadImageButtonClicked event
+    }
+
+    public void setCredentials(Credentials credentials) {
+        this.credentials = credentials;
     }
 }

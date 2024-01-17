@@ -5,6 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class LoginController {
 
     boolean loginSuccessful = false;
@@ -18,13 +22,13 @@ public class LoginController {
     @FXML
     private Button loginButton;
 
-
-     private Stage primaryStage;
+    private Stage primaryStage;
 
     // Add this method to set the primaryStage
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
+
 
     @FXML
     public void loginButtonClicked() {
@@ -32,15 +36,20 @@ public class LoginController {
         String password = passwordField.getText();
 
         if (isValidCredentials(username, password)) {
+
             loginSuccessful = true;
 
-            System.out.println("Login successful.");
+            // Storing the credentials in the Credentials class
+            Credentials credentials = new Credentials(username, password);
+            Credentials.setCredentials(credentials);
 
-            ClientApp.openMainApp(primaryStage);
+            System.out.println("Credentials used: " + credentials);
 
-        }
+            System.out.println("Login successful. Trying to load MainApplication...");
 
-        else {
+            ClientApp.openMainApp(primaryStage, credentials);
+
+        } else {
             System.out.println("Login failed.");
             showAlert();
         }
@@ -63,25 +72,48 @@ public class LoginController {
     }
 
     private boolean isValidCredentials(String username, String password) {
-        // For demonstration purposes, hardcoding valid credentials
-        return ("admin".equals(username) && "adminkey".equals(password)) ||
-                ("user".equals(username) && "userkey".equals(password));
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/resources/client_credentials.csv"))) {
+            // Skip the header row
+            reader.readLine();
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 3 && parts[0].equals(username) && parts[1].equals(password)) {
+                    System.out.println("Credentials valid. Hello " + parts[2]);
+
+                    //Show hello Message on screen
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Hello " + parts[2] + "!\n\n" + "Please press the OK button to enter the Application.", ButtonType.OK);
+                    alert.setTitle("Credentials Valid!");
+                    alert.showAndWait();
+
+                    return true;
+
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Login failed.");
+        showAlert();
+        return false;
     }
 
 
-  /*  private void openMainApp(Window window) {
-        // Close the login window
-        Stage stage = (Stage) window;
-        stage.close();
-        // Open the main app window
+    /*  private void openMainApp(Window window) {
+          // Close the login window
+          Stage stage = (Stage) window;
+          stage.close();
+          // Open the main app window
 
-    }
+      }
 
 
-   */
+     */
     private void showAlert() {
         Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter valid username and password.", ButtonType.OK);
-        alert.setTitle("Invalid credentials");
+        alert.setTitle("Invalid credentials!");
         alert.showAndWait();
     }
+
 }

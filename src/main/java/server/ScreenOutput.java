@@ -86,19 +86,19 @@ public class ScreenOutput {
      */
     public void displayContent(Content content) {
 
-            if(content.getData() instanceof String)
-            {
-                System.out.println(content.getData().toString());
+        if(content.getData() instanceof String)
+        {
+            System.out.println(content.getData().toString());
 
-                Platform.runLater(() -> {
-            contentLabel.setText(content.getData().toString());});
+            Platform.runLater(() -> {
+                contentLabel.setText(content.getData().toString());});
 
-            } else if (content.getData() instanceof byte[]) {
-                byte[] receivedArray=(byte[])content.getData();
+        } else if (content.getData() instanceof byte[]) {
+            byte[] receivedArray=(byte[])content.getData();
 
-                displayImage(Arrays.toString(receivedArray));
-                //todo implement display
-            }
+            displayImage(Arrays.toString(receivedArray));
+            //todo implement display. You don't say?
+        }
 
 
 
