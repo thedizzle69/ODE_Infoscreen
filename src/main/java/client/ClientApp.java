@@ -107,12 +107,14 @@ public class ClientApp extends Application {
     }
 
 
+
     /**
      * Opens the main application window if login is successful.
      *
      * @param primaryStage The primary stage for the JavaFX application.
      * @param credentials The user credentials used for login.
      */
+
 
     public static void openMainApp(Stage primaryStage, Credentials credentials) {
 

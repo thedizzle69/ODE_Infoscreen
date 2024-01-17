@@ -16,6 +16,7 @@ import java.io.IOException;
  * @version 420.69
  * @since 2023-12-03
  */
+
 public class LoginController {
 
     /**
@@ -50,6 +51,7 @@ public class LoginController {
     /**
      * Initializes the GUI components and sets up event handlers.
      */
+
     // Add this method to set the primaryStage
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -59,6 +61,7 @@ public class LoginController {
     /**
      * Handles the event when the login button is clicked.
      */
+
     @FXML
     public void loginButtonClicked() {
         String username = usernameField.getText();
@@ -150,6 +153,7 @@ public class LoginController {
     /**
      * Shows an alert when the login fails.
      */
+
     private void showAlert() {
         Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter valid username and password.", ButtonType.OK);
         alert.setTitle("Invalid credentials!");

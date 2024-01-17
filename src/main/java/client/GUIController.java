@@ -70,6 +70,7 @@ public class GUIController {
     /**
      * Sets the primary stage for the JavaFX application.
      */
+
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
@@ -77,6 +78,7 @@ public class GUIController {
     /**
      * Initializes the GUI components and sets up event handlers.
      */
+
     @FXML
     public void initialize() {
 
@@ -186,6 +188,7 @@ public class GUIController {
      *
      * @param credentials The credentials to be set.
      */
+
     public void setCredentials(Credentials credentials) {
         this.credentials = credentials;
     }

@@ -3,7 +3,6 @@ package client;
 
 import java.io.Serializable;
 
-
 /**
  * Represents user credentials for authentication.
  *
@@ -25,6 +24,7 @@ public record Credentials(String username, String password) implements Serializa
      *
      * @return The credentials.
      */
+
     public static Credentials getCredentials() {
         return null;
     }
@@ -34,6 +34,7 @@ public record Credentials(String username, String password) implements Serializa
      *
      * @return The username.
      */
+
     public String getUsername() {
         return username;
     }
@@ -43,6 +44,7 @@ public record Credentials(String username, String password) implements Serializa
      *
      * @return The password.
      */
+
     public String getPassword() {
         return password;
     }

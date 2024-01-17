@@ -38,7 +38,6 @@ public record Content(Credentials credentials, ContentType contentType, String t
         }
     }
 
-
     /**
      * Returns a string representation of the content.
      *
@@ -57,6 +56,7 @@ public record Content(Credentials credentials, ContentType contentType, String t
      *
      * @return The user credentials.
      */
+
 
     public Credentials getCredentials() {
         return credentials;
