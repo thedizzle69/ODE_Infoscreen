@@ -20,6 +20,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 
@@ -46,6 +47,7 @@ public class ScreenOutput {
     public ScreenOutput() {
         this.stage = new Stage();
         initializeStage();
+
     }
 
     /**
@@ -65,7 +67,7 @@ public class ScreenOutput {
 
 
 
-
+            //testDisplayImage();
             stage.setTitle("Output");
 
             stage.setScene(new Scene(root, 400, 200));  // Adjust the size as needed
@@ -84,6 +86,42 @@ public class ScreenOutput {
      *
      * @param content The content to be displayed.
      */
+
+    public void displayContent(Content content) {
+        if(content.getData() instanceof String) {
+            Platform.runLater(() -> contentLabel.setText((String) content.getData()));
+        } else if (content.getData() instanceof byte[]) {
+            byte[] imageBytes = (byte[]) content.getData();
+            displayImage(imageBytes);
+        }
+        stage.show();
+    }
+
+    /*private void displayImage(byte[] imageBytes) {
+        Image image = new Image(new ByteArrayInputStream(imageBytes));
+        Platform.runLater(() -> IvImageView.setImage(image));
+    }
+*/
+
+    //Static image works. That comfirms that "ImageView" and JavaFX setup in ScreenOutput are functioning correctly.
+    //I guess, that the issue, therefore, is likely related to how the image data is being handled when sent as a byte array from cleint to the server
+    /*private void testDisplayImage() {
+        Image testImage = new Image("file:///C:/Users/tahir/Pictures/attack.png"); // Using forward slashes
+        Platform.runLater(() -> IvImageView.setImage(testImage));
+    }
+*/
+
+
+    //Debugging
+    private void displayImage(byte[] imageBytes) {
+        System.out.println("Attempting to display image. Byte Array Length: " + imageBytes.length);
+        Image image = new Image(new ByteArrayInputStream(imageBytes));
+        Platform.runLater(() -> {
+            IvImageView.setImage(image);
+        });
+    }
+
+    /*
     public void displayContent(Content content) {
 
         if(content.getData() instanceof String)
@@ -106,6 +144,7 @@ public class ScreenOutput {
         stage.show(); // Show the stage when content is updated
 
     }
+*/
 
     /**
      * Displays an image on the ImageView. Converts a string representation of an image byte array
@@ -113,7 +152,8 @@ public class ScreenOutput {
      *
      * @param imageArray The string representation of the image byte array.
      */
-    private void displayImage(String imageArray) {
+
+   /* private void displayImage(String imageArray) {
 
         System.out.println(imageArray);
         byte[] imageBytes = parseImageArray(imageArray);
@@ -125,6 +165,8 @@ public class ScreenOutput {
             });
         }
     }
+    */
+
     /**
      * Parses a string representation of an image byte array and returns a byte array.
      * Used for converting image data into a displayable format.

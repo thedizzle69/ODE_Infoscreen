@@ -41,6 +41,21 @@ public class ServerController {
 
     private ScreenOutput screenOutput;
 
+    public void handleDisplayContent() {
+        if (screenOutput == null) {
+            screenOutput = new ScreenOutput();
+        }
+        int selectedIndex = lvListView.getSelectionModel().getSelectedIndex();
+        if (selectedIndex != -1) {
+            Content selectedContent = items.get(selectedIndex);
+            screenOutput.displayContent(selectedContent);
+            items.remove(selectedIndex);
+
+            tfLogField.appendText("\nDisplaying Element index: " + selectedIndex);
+        }
+    }
+
+/*
     @FXML
     public void handleDisplayContent() {
 
@@ -64,7 +79,7 @@ public class ServerController {
 
     }
 
-
+*/
     /**
      * Updates the list view with the provided content list.
      *s
