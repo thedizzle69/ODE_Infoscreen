@@ -97,22 +97,12 @@ public class ScreenOutput {
         stage.show();
     }
 
-    /*private void displayImage(byte[] imageBytes) {
-        Image image = new Image(new ByteArrayInputStream(imageBytes));
-        Platform.runLater(() -> IvImageView.setImage(image));
-    }
-*/
-
-    //Static image works. That comfirms that "ImageView" and JavaFX setup in ScreenOutput are functioning correctly.
-    //I guess, that the issue, therefore, is likely related to how the image data is being handled when sent as a byte array from cleint to the server
-    /*private void testDisplayImage() {
-        Image testImage = new Image("file:///C:/Users/tahir/Pictures/attack.png"); // Using forward slashes
-        Platform.runLater(() -> IvImageView.setImage(testImage));
-    }
-*/
-
-
-    //Debugging
+    /**
+     * Displays an image on the {@code ImageView}.
+     * Converts a byte array representation of an image into an {@code Image} object for display.
+     *
+     * @param imageBytes The byte array representing the image.
+     */
     private void displayImage(byte[] imageBytes) {
         System.out.println("Attempting to display image. Byte Array Length: " + imageBytes.length);
         Image image = new Image(new ByteArrayInputStream(imageBytes));
@@ -120,6 +110,40 @@ public class ScreenOutput {
             IvImageView.setImage(image);
         });
     }
+
+    /**
+     * Parses a string representation of an image byte array and returns a byte array.
+     * Used for converting image data into a displayable format.
+     *
+     * @param imageArray The string representation of the image byte array.
+     * @return The parsed byte array of the image.
+     */
+    private byte[] parseImageArray(String imageArray) {
+        String[] byteValues = imageArray.substring(1, imageArray.length() - 1).split(",");
+        byte[] bytes = new byte[byteValues.length];
+
+        for (int i = 0; i < byteValues.length; i++) {
+            bytes[i] = Byte.parseByte(byteValues[i].trim());
+        }
+
+        return bytes;
+    }
+}
+
+
+
+    //Static image works. That comfirms that "ImageView" and JavaFX setup in ScreenOutput are functioning correctly.
+    //I guess, that the issue, therefore, is likely related to how the image data is being handled when sent as a byte array from cleint to the server
+
+    /*
+    private void testDisplayImage() {
+        Image testImage = new Image("file:///C:/Users/tahir/Pictures/attack.png"); // Using forward slashes
+        Platform.runLater(() -> IvImageView.setImage(testImage));
+    }
+*/
+
+
+
 
     /*
     public void displayContent(Content content) {
@@ -153,6 +177,7 @@ public class ScreenOutput {
      * @param imageArray The string representation of the image byte array.
      */
 
+
    /* private void displayImage(String imageArray) {
 
         System.out.println(imageArray);
@@ -167,21 +192,4 @@ public class ScreenOutput {
     }
     */
 
-    /**
-     * Parses a string representation of an image byte array and returns a byte array.
-     * Used for converting image data into a displayable format.
-     *
-     * @param imageArray The string representation of the image byte array.
-     * @return The parsed byte array of the image.
-     */
-    private byte[] parseImageArray(String imageArray) {
-        String[] byteValues = imageArray.substring(1, imageArray.length() - 1).split(",");
-        byte[] bytes = new byte[byteValues.length];
 
-        for (int i = 0; i < byteValues.length; i++) {
-            bytes[i] = Byte.parseByte(byteValues[i].trim());
-        }
-
-        return bytes;
-    }
-}
