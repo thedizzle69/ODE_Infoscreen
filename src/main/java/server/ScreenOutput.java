@@ -90,7 +90,9 @@ public class ScreenOutput {
     public void displayContent(Content content) {
         if(content.getData() instanceof String) {
             Platform.runLater(() -> contentLabel.setText((String) content.getData()));
+
         } else if (content.getData() instanceof byte[] imageBytes) {
+
             displayImage(imageBytes);
         }
         stage.show();
@@ -129,10 +131,9 @@ public class ScreenOutput {
     }
 }
 
-
-
 //Static image works. That comfirms that "ImageView" and JavaFX setup in ScreenOutput are functioning correctly.
 //I guess, that the issue, therefore, is likely related to how the image data is being handled when sent as a byte array from cleint to the server
+
 
     /*
     private void testDisplayImage() {
@@ -169,12 +170,12 @@ public class ScreenOutput {
     }
 */
 
-/**
- * Displays an image on the ImageView. Converts a string representation of an image byte array
- * into an Image object for display.
- *
- * @param imageArray The string representation of the image byte array.
- */
+    /**
+     * Displays an image on the ImageView. Converts a string representation of an image byte array
+     * into an Image object for display.
+     *
+     * @param imageArray The string representation of the image byte array.
+     */
 
 
    /* private void displayImage(String imageArray) {
@@ -189,4 +190,5 @@ public class ScreenOutput {
             });
         }
     }
+
     */
