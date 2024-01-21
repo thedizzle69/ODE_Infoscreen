@@ -22,7 +22,7 @@
         <fxgl.version>17.3</fxgl.version>
     </properties>
 
-        <!-- dependency managment ftw -->
+        <!-- dependency management ftw -->
 
     <dependencyManagement>
         <dependencies>
