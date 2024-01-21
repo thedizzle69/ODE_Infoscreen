@@ -13,16 +13,16 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import resources.ContentType;
+// import resources.ContentType;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
+// import javax.imageio.ImageIO;
+// import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.file.FileSystems;
-import java.nio.file.Files;
+// import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
+// import java.util.Arrays;
 
 /**
  * The `ScreenOutput` class handles the graphical display of content in a JavaFX application.
@@ -37,7 +37,7 @@ public class ScreenOutput {
     private Label contentLabel;
 
 
-    private Stage stage;
+    private final Stage stage;
 
 
 
@@ -90,8 +90,9 @@ public class ScreenOutput {
     public void displayContent(Content content) {
         if(content.getData() instanceof String) {
             Platform.runLater(() -> contentLabel.setText((String) content.getData()));
-        } else if (content.getData() instanceof byte[]) {
-            byte[] imageBytes = (byte[]) content.getData();
+
+        } else if (content.getData() instanceof byte[] imageBytes) {
+
             displayImage(imageBytes);
         }
         stage.show();
@@ -130,10 +131,9 @@ public class ScreenOutput {
     }
 }
 
+//Static image works. That comfirms that "ImageView" and JavaFX setup in ScreenOutput are functioning correctly.
+//I guess, that the issue, therefore, is likely related to how the image data is being handled when sent as a byte array from cleint to the server
 
-
-    //Static image works. That comfirms that "ImageView" and JavaFX setup in ScreenOutput are functioning correctly.
-    //I guess, that the issue, therefore, is likely related to how the image data is being handled when sent as a byte array from cleint to the server
 
     /*
     private void testDisplayImage() {
@@ -190,6 +190,5 @@ public class ScreenOutput {
             });
         }
     }
+
     */
-
-

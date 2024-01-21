@@ -1,0 +1,66 @@
+name: Build and Release JARs
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build_and_release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'maven'
+
+
+      - name: Build Client JAR
+        run: |
+          mkdir -p jar
+          javac -d jar/ClientApp -cp . src/main/java/client/*.java src/main/java/resources/*.java
+
+          echo "Main-Class: client.ClientApp" > jar/manifest.txt
+          jar cfm jar/ClientApp.jar jar/manifest.txt -C jar/ClientApp .
+
+      - name: Create Client Start Script
+        run: |
+          mkdir -p jar
+          touch jar/start_client.sh
+          echo \#\!/bin/bash > jar/start_client.sh
+          echo "cd \"\$(dirname \"\$0\")\"" >> jar/start_client.sh
+          echo "sudo java -jar ClientApp.jar" >> jar/start_client.sh
+          chmod +x jar/start_client.sh
+
+      - name: Build Server JAR
+        run: |
+          mkdir -p jar
+          javac -d jar/ServerApp -cp . src/main/java/server/*.java src/main/java/resources/*.java
+
+          echo "Main-Class: server.ServerApp" > jar/manifest.txt
+          jar cfm jar/ServerApp.jar jar/manifest.txt -C jar/ServerApp .
+
+      - name: Create Server Start Script
+        run: |
+          
+          mkdir -p jar
+          touch jar/start_server.sh
+          echo \#\!/bin/bash > jar/start_server.sh
+          echo "cd \"\$(dirname \"\$0\")\"" >> jar/start_server.sh
+          echo "java -jar ServerApp.jar" >> jar/start_server.sh
+          chmod +x jar/start_server.sh    
+
+      - name: List JAR contents
+        run: ls -R jar
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: JAR-Release
+          path: jar

@@ -1,9 +1,9 @@
 package server;
 
 import client.Content;
-import javafx.application.Platform;
-import javafx.beans.Observable;
-import javafx.collections.FXCollections;
+// import javafx.application.Platform;
+// import javafx.beans.Observable;
+// import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +17,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.Buffer;
+// import java.nio.Buffer;
 
 public class ServerController {
 
@@ -25,7 +25,7 @@ public class ServerController {
     private Label dynamicInfoLabel;
 
     @FXML
-    private ListView<Content> lvListView= new ListView<>();;
+    private ListView<Content> lvListView= new ListView<>();
 
     @FXML
     private BorderPane root;
