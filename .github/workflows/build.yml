@@ -27,7 +27,7 @@ jobs:
           javac -d jar/ClientApp -cp . src/main/java/client/*.java src/main/java/resources/*.java
 
           echo "Main-Class: client.ClientApp" > jar/manifest.txt
-          jar cfm jar/ClientApp.jar jar/manifest.txt -C jar/ClientApp .
+          jar cfm jar/ClientApp.jar jar/manifest.txt -C jar .
 
       - name: Create Client Start Script
         run: |
@@ -41,10 +41,10 @@ jobs:
       - name: Build Server JAR
         run: |
           mkdir -p jar
-          javac -d jar/ServerApp -cp . src/main/java/server/*.java src/main/java/resources/*.java
+          javac -d jar -cp . src/main/java/server/*.java src/main/java/resources/*.java
 
           echo "Main-Class: server.ServerApp" > jar/manifest.txt
-          jar cfm jar/ServerApp.jar jar/manifest.txt -C jar/ServerApp .
+          jar cfm jar/ServerApp.jar jar/manifest.txt -C jar .
 
       - name: Create Server Start Script
         run: |
