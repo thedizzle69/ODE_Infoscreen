@@ -41,6 +41,26 @@ public class ServerController {
 
     private ScreenOutput screenOutput;
 
+    /**
+     * Handles the display of content selected from the ListView.
+     * It creates a ScreenOutput instance if not already created,
+     * displays the selected content, and logs the action in the text area.
+     */
+    public void handleDisplayContent() {
+        if (screenOutput == null) {
+            screenOutput = new ScreenOutput();
+        }
+        int selectedIndex = lvListView.getSelectionModel().getSelectedIndex();
+        if (selectedIndex != -1) {
+            Content selectedContent = items.get(selectedIndex);
+            screenOutput.displayContent(selectedContent);
+            items.remove(selectedIndex);
+
+            tfLogField.appendText("\nDisplaying Element index: " + selectedIndex);
+        }
+    }
+
+/*
     @FXML
     public void handleDisplayContent() {
 
@@ -64,7 +84,7 @@ public class ServerController {
 
     }
 
-
+*/
     /**
      * Updates the list view with the provided content list.
      *s
@@ -96,10 +116,15 @@ public class ServerController {
 
     }
 
-    // Method to get content from the client, to be implemented as per your application logic
+    /**
+     * Retrieves content from the client. This is a placeholder method and
+     * needs to be implemented according to the application logic.
+     *
+     * @return String representing the content from the client.
+     */
     private String getContentFromClient() {
         // Return the content received from the client
-        // This is just a placeholder, you will need to implement the logic to retrieve actual content
+
         return "Content from client";
     }
 
