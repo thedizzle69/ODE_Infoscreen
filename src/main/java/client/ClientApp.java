@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
+//Final Test
+
 
 /**
  * The main entry point for the client application. Extends JavaFX Application class.
@@ -22,6 +24,7 @@ import java.nio.file.Path;
 public class ClientApp extends Application {
 
     /**
+     *
      * Entry point for the client application. Initializes the login screen.
      *
      * @param primaryStage The primary stage for the JavaFX application.

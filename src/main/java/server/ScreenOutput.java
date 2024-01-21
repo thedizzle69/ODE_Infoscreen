@@ -13,15 +13,16 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import resources.ContentType;
+// import resources.ContentType;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
+// import javax.imageio.ImageIO;
+// import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.file.FileSystems;
+// import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
+// import java.util.Arrays;
 
 /**
  * The `ScreenOutput` class handles the graphical display of content in a JavaFX application.
@@ -36,7 +37,7 @@ public class ScreenOutput {
     private Label contentLabel;
 
 
-    private Stage stage;
+    private final Stage stage;
 
 
 
@@ -46,6 +47,7 @@ public class ScreenOutput {
     public ScreenOutput() {
         this.stage = new Stage();
         initializeStage();
+
     }
 
     /**
@@ -65,7 +67,7 @@ public class ScreenOutput {
 
 
 
-
+            //testDisplayImage();
             stage.setTitle("Output");
 
             stage.setScene(new Scene(root, 400, 200));  // Adjust the size as needed
@@ -84,6 +86,65 @@ public class ScreenOutput {
      *
      * @param content The content to be displayed.
      */
+
+    public void displayContent(Content content) {
+        if(content.getData() instanceof String) {
+            Platform.runLater(() -> contentLabel.setText((String) content.getData()));
+        } else if (content.getData() instanceof byte[] imageBytes) {
+            displayImage(imageBytes);
+        }
+        stage.show();
+    }
+
+    /**
+     * Displays an image on the {@code ImageView}.
+     * Converts a byte array representation of an image into an {@code Image} object for display.
+     *
+     * @param imageBytes The byte array representing the image.
+     */
+    private void displayImage(byte[] imageBytes) {
+        System.out.println("Attempting to display image. Byte Array Length: " + imageBytes.length);
+        Image image = new Image(new ByteArrayInputStream(imageBytes));
+        Platform.runLater(() -> {
+            IvImageView.setImage(image);
+        });
+    }
+
+    /**
+     * Parses a string representation of an image byte array and returns a byte array.
+     * Used for converting image data into a displayable format.
+     *
+     * @param imageArray The string representation of the image byte array.
+     * @return The parsed byte array of the image.
+     */
+    private byte[] parseImageArray(String imageArray) {
+        String[] byteValues = imageArray.substring(1, imageArray.length() - 1).split(",");
+        byte[] bytes = new byte[byteValues.length];
+
+        for (int i = 0; i < byteValues.length; i++) {
+            bytes[i] = Byte.parseByte(byteValues[i].trim());
+        }
+
+        return bytes;
+    }
+}
+
+
+
+//Static image works. That comfirms that "ImageView" and JavaFX setup in ScreenOutput are functioning correctly.
+//I guess, that the issue, therefore, is likely related to how the image data is being handled when sent as a byte array from cleint to the server
+
+    /*
+    private void testDisplayImage() {
+        Image testImage = new Image("file:///C:/Users/tahir/Pictures/attack.png"); // Using forward slashes
+        Platform.runLater(() -> IvImageView.setImage(testImage));
+    }
+*/
+
+
+
+
+    /*
     public void displayContent(Content content) {
 
         if(content.getData() instanceof String)
@@ -106,14 +167,17 @@ public class ScreenOutput {
         stage.show(); // Show the stage when content is updated
 
     }
+*/
 
-    /**
-     * Displays an image on the ImageView. Converts a string representation of an image byte array
-     * into an Image object for display.
-     *
-     * @param imageArray The string representation of the image byte array.
-     */
-    private void displayImage(String imageArray) {
+/**
+ * Displays an image on the ImageView. Converts a string representation of an image byte array
+ * into an Image object for display.
+ *
+ * @param imageArray The string representation of the image byte array.
+ */
+
+
+   /* private void displayImage(String imageArray) {
 
         System.out.println(imageArray);
         byte[] imageBytes = parseImageArray(imageArray);
@@ -125,21 +189,4 @@ public class ScreenOutput {
             });
         }
     }
-    /**
-     * Parses a string representation of an image byte array and returns a byte array.
-     * Used for converting image data into a displayable format.
-     *
-     * @param imageArray The string representation of the image byte array.
-     * @return The parsed byte array of the image.
-     */
-    private byte[] parseImageArray(String imageArray) {
-        String[] byteValues = imageArray.substring(1, imageArray.length() - 1).split(",");
-        byte[] bytes = new byte[byteValues.length];
-
-        for (int i = 0; i < byteValues.length; i++) {
-            bytes[i] = Byte.parseByte(byteValues[i].trim());
-        }
-
-        return bytes;
-    }
-}
+    */

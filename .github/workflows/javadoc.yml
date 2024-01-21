@@ -21,10 +21,13 @@ jobs:
           cache: 'maven'
 
       - name: Generate Javadoc
+        run: mvn javadoc:jar
+
+      - name: Generate Javadoc
         run: mvn javadoc:javadoc
 
       - name: Move Javadoc to Directory
-        run: mv target/site/apidocs/* docs/
+        run: mv target/apidocs/* docs/
 
       - name: Upload Javadoc to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

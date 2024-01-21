@@ -2,11 +2,9 @@
  * The `ServerApp` class represents the main server application for handling client connections
  * and managing content received from clients. It extends the JavaFX `Application` class and
  * provides a graphical user interface for server interaction.
- *
  * The server operates on a separate thread to accept client connections and processes incoming
  * content from clients. The server utilizes JavaFX components for the user interface, including
  * a main frame and a text area for displaying log messages.
- *
  * The server application is designed to receive instances of the `Content` class from clients,
  * update a JavaFX `ListView` with the received content, and display log messages in the text area.
  *test
@@ -49,7 +47,7 @@ public class ServerApp extends Application {
     public String getLogMessages() {
         return logMessages;
     }
-    private ScreenOutput screenOutput;
+
 
     /**
      * The main method for launching the server application.
@@ -74,7 +72,7 @@ public class ServerApp extends Application {
         // Check JavaFX version
         System.out.println("JavaFX Runtime Version: " + System.getProperties().getProperty("javafx.runtime.version"));
 
-        screenOutput = new ScreenOutput();
+        // ScreenOutput screenOutput = new ScreenOutput();
 
         logMessages= " Loading main frame...\n";
 
@@ -126,7 +124,7 @@ public class ServerApp extends Application {
                 {
 
                     ClientSocket = serverSocket.accept();
-                    appendToLog("Incoming request from " + ClientSocket.getInetAddress());
+                    appendToLog("Incoming request from " + ClientSocket.getInetAddress() + "\n");
 
                     /*
                     //Checking Credentials
@@ -142,7 +140,7 @@ public class ServerApp extends Application {
                         System.out.println ("Trying to process content from client...\n");
                         System.out.println("Content data: " + receivedContent.getData() + "\n");
 */
-                        new Thread(() -> processClientContent()).start();
+                        new Thread(this::processClientContent).start();
 
                     /* }  else {
                         appendToLog("Credentials invalid. Sending error message to client...\n");
