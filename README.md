@@ -6,7 +6,7 @@
 
 ### props to
 
-https://github.com/HackXIt/ for the help with the javafx stuff (which was like 2 clicks. But the most important clicks)
+`https://github.com/HackXIt/` for the help with the javafx stuff (which was like 2 clicks. But the most important clicks)
 
 ### more props to the dude who made this even happen.
 
