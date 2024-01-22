@@ -4,6 +4,10 @@
 
 (important note: I updated the dependency management in the pom and updated some javafx 17.0.6 dependencies local in the project structure. I don't know if this effects anybody. The jars should work flawlessly tho as I alraeady compiled them. If you have issues please go to the project structure/ ext libs and kick the java base 11 dependecies (2 libs) and add the java 17.0.6 lib)
 
+
+props to https://github.com/HackXIt/ for the help with the javafx stuff
+
+
 ## props to
 
 ## https://github.com/HackXIt/ for the help with the javafx stuff (which was like 2 clicks. But the most important clicks)
