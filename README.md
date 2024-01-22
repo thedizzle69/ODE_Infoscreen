@@ -43,7 +43,7 @@ Before running the application, make sure you have at least JavaFX 17 installed 
 
 ## How to run the application
 
-There are 2 ways two run the application. You can either run the jar file or you can run the application compiling it yourself.
+There are 2 ways two run the application. You can either run the jar file or you can run the application compiling it yourself. I recommend the 1st option
 
 
 ### How to run the application by using the jars
