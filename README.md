@@ -4,6 +4,8 @@
 
 (important note: I updated the dependency management in the pom and updated some javafx 17.0.6 dependencies local in the project structure. I don't know if this effects anybody. The jars should work flawlessly tho as I alraeady compiled them. If you have issues please go to the project structure/ ext libs and kick the java base 11 dependecies (2 libs) and add the java 17.0.6 lib)
 
+props to https://github.com/HackXIt/ for the help with the javafx stuff
+
 This is a project for the course "Object-oriented Software Development" at the University of Applied Sciences Wien.
 
 The project is a Java application that simulates a simple infoscreen. It is a simple JavaFX application that displays a few images and text on the screen. The application is built using Maven and the JavaFX library.
