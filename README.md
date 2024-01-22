@@ -12,7 +12,6 @@
 
 `https://github.com/thedizzle69/`
 
-
 I don't know who diz is, but I think it was the guy who made the javafx library working. So props to him.
 
 # This is a project for the course "Object-oriented Software Development (Or something like htat. They call it ODE)" at the University of Applied Sciences Wien.
