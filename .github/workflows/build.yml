@@ -20,11 +20,10 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-
       - name: Build Client JAR
         run: |
           mkdir -p jar
-          javac -d jar/ClientApp -cp . src/main/java/client/*.java src/main/java/resources/*.java
+          javac -d jar -cp ".:jar/*:javafx-sdk/javafx-sdk-21.0.2/lib/*" src/main/java/client/*.java src/main/java/resources/*.java
 
           echo "Main-Class: client.ClientApp" > jar/manifest.txt
           jar cfm jar/ClientApp.jar jar/manifest.txt -C jar .
@@ -41,7 +40,7 @@ jobs:
       - name: Build Server JAR
         run: |
           mkdir -p jar
-          javac -d jar -cp . src/main/java/server/*.java src/main/java/resources/*.java
+          javac -d jar -cp ".:jar/*:javafx-sdk/javafx-sdk-21.0.2/lib/*" src/main/java/server/*.java src/main/java/resources/*.java
 
           echo "Main-Class: server.ServerApp" > jar/manifest.txt
           jar cfm jar/ServerApp.jar jar/manifest.txt -C jar .

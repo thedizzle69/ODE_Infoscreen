@@ -127,6 +127,13 @@
             <version>${fxgl.version}</version>
         </dependency>
 
+        <!-- JavaFX Base -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+
         <!-- JUnit dependencies -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -223,6 +230,7 @@
                     <reportOutputDirectory>${project.basedir}/docs</reportOutputDirectory>
                 </configuration>
             </plugin>
+
 
         </plugins>
     </build>
