@@ -6,11 +6,11 @@
 
 ### props to
 
-`https://github.com/HackXIt/` for the help with the javafx stuff (which was like 2 clicks. But the most important clicks)
+https://github.com/HackXIt/ for the help with the javafx stuff (which was like 2 clicks. But the most important clicks)
 
 ### more props to the dude who made this even happen.
 
-`https://github.com/thedizzle69/` 
+https://github.com/thedizzle69/ 
 
 I don't know who diz is, but I think it was the guy who made the javafx library working. So props to him.
 
