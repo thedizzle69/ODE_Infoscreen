@@ -22,38 +22,19 @@ jobs:
 
       - name: Build Client JAR
         run: |
-          mkdir -p jar
-          javac -d jar -cp ".:jar/*:javafx-sdk/javafx-sdk-21.0.2/lib/*" src/main/java/client/*.java src/main/java/resources/*.java
+          
+          javac --module-path /YourPathToTheJFX/javafx-sdk/javafx-sdk-21.0.2/lib --add-modules javafx.controls,javafx.fxml -d jar/ClientApp src/main/java/client/*.java src/main/java/resources/*.java
 
           echo "Main-Class: client.ClientApp" > jar/manifest.txt
-          jar cfm jar/ClientApp.jar jar/manifest.txt -C jar .
-
-      - name: Create Client Start Script
-        run: |
-          mkdir -p jar
-          touch jar/start_client.sh
-          echo \#\!/bin/bash > jar/start_client.sh
-          echo "cd \"\$(dirname \"\$0\")\"" >> jar/start_client.sh
-          echo "sudo java -jar ClientApp.jar" >> jar/start_client.sh
-          chmod +x jar/start_client.sh
+          jar cfe jar/ClientApp.jar client.ClientApp -C jar/ClientApp .
 
       - name: Build Server JAR
         run: |
-          mkdir -p jar
-          javac -d jar -cp ".:jar/*:javafx-sdk/javafx-sdk-21.0.2/lib/*" src/main/java/server/*.java src/main/java/resources/*.java
 
+          javac --module-path /YourPathToTheJFX/javafx-sdk/javafx-sdk-21.0.2/lib --add-modules javafx.controls,javafx.fxml -d jar/ServerApp src/main/java/client/*.java src/main/java/resources/*.java src/main/java/server/*.java
           echo "Main-Class: server.ServerApp" > jar/manifest.txt
-          jar cfm jar/ServerApp.jar jar/manifest.txt -C jar .
+          jar cfe jar/ServerApp.jar server.ServerApp -C jar/ServerApp .
 
-      - name: Create Server Start Script
-        run: |
-          
-          mkdir -p jar
-          touch jar/start_server.sh
-          echo \#\!/bin/bash > jar/start_server.sh
-          echo "cd \"\$(dirname \"\$0\")\"" >> jar/start_server.sh
-          echo "java -jar ServerApp.jar" >> jar/start_server.sh
-          chmod +x jar/start_server.sh    
 
       - name: List JAR contents
         run: ls -R jar
