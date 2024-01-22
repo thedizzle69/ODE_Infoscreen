@@ -14,10 +14,10 @@ props to https://github.com/HackXIt/ for the help with the javafx stuff
 
 more props to the dude who made this even happen.
 
+
 ## https://github.com/thedizzle69/ 
 
 I don't know who it was, but I think it was the guy who made the javafx library working. So props to him.
-
 
 # This is a project for the course "Object-oriented Software Development (Or something. ODE)" at the University of Applied Sciences Wien.
 
