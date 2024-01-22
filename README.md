@@ -4,20 +4,15 @@
 
 (important note: I updated the dependency management in the pom and updated some javafx 17.0.6 dependencies local in the project structure. I don't know if this effects anybody. The jars should work flawlessly tho as I alraeady compiled them. If you have issues please go to the project structure/ ext libs and kick the java base 11 dependecies (2 libs) and add the java 17.0.6 lib)
 
+### props to
 
-props to https://github.com/HackXIt/ for the help with the javafx stuff
-
-
-## props to
-
-## https://github.com/HackXIt/ for the help with the javafx stuff (which was like 2 clicks. But the most important clicks)
+### https://github.com/HackXIt/ for the help with the javafx stuff (which was like 2 clicks. But the most important clicks)
 
 more props to the dude who made this even happen.
 
-## https://github.com/thedizzle69/ 
+### https://github.com/thedizzle69/ 
 
-I don't know who it was, but I think it was the guy who made the javafx library working. So props to him.
-
+I don't know who diz is, but I think it was the guy who made the javafx library working. So props to him.
 
 # This is a project for the course "Object-oriented Software Development (Or something. ODE)" at the University of Applied Sciences Wien.
 
