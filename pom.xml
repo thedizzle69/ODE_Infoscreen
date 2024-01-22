@@ -127,6 +127,13 @@
             <version>${fxgl.version}</version>
         </dependency>
 
+        <!-- JavaFX Base -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+
         <!-- JUnit dependencies -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -209,6 +216,22 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Javadoc plugin configuration -->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.6.3</version>
+                <configuration>
+                    <show>protected</show>
+                    <show>package</show>
+                    <show>private</show>
+                    <reportOutputDirectory>${project.basedir}/docs</reportOutputDirectory>
+                </configuration>
+            </plugin>
+
+
         </plugins>
     </build>
 </project>
