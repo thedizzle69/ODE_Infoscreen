@@ -14,7 +14,7 @@
 
 I don't know who diz is, but I think it was the guy who made the javafx library working. So props to him.
 
-# This is a project for the course "Object-oriented Software Development (Or something like htat. They call it ODE)" at the University of Applied Sciences Wien.
+# This is a project for the course "Object-oriented Software Development (Or something like that. They call it ODE)" at the University of Applied Sciences Wien.
 
 The project is a Java application that simulates a simple infoscreen. It is a simple JavaFX application that displays a few images and text on the screen. The application is built using Maven and the JavaFX library.
 
