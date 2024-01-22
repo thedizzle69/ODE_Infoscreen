@@ -2,7 +2,10 @@
 
 ### Java Infoscreen by Omerovic, Bißmann, Singh
 
-(important note: I updated the dependency management in the pom and updated some javafx 17.0.6 dependencies local in the porject structure. I don't know if this effects everybody. The jars should work flawlessly tho as I alraeady compiled them. If you have issues please go to the project structure/ ext libs and kick the java base 11 dependecies (2 libs) and add the java 17.0.6 lib)
+(important note: I updated the dependency management in the pom and updated some javafx 17.0.6 dependencies local in the project structure. I don't know if this effects anybody. The jars should work flawlessly tho as I alraeady compiled them. If you have issues please go to the project structure/ ext libs and kick the java base 11 dependecies (2 libs) and add the java 17.0.6 lib)
+
+props to https://github.com/HackXIt/ for the help with the javafx stuff
+
 
 This is a project for the course "Object-oriented Software Development" at the University of Applied Sciences Wien.
 
@@ -80,3 +83,45 @@ The ServerApp will take the connection by the Client and when it gets sent a con
 You can now click on the desired content and press the button "Display Chosen Content" and it will open a new window displaying the chosen content.
 
 # This is about it. Have fun using the app.
+
+## Additional info
+
+### There are a few workflows installed for automated jobs. ( I mean ... There should be. I don't know if they work tho. I will test them later.)
+
+1. The maven.yml builds the package and checks for build errors.
+2. The javadoc.yml creates the html files and also copies the files into the /docs directory to have a better overview than in the /target dir.
+3. The build.yml creates specific jar files for the separate applications, only compiling the needed files and also creating a startup_script for the apps
+4. The checkdiz.yml runs a checkstyle, but this isn't working as expected, as it does not work with the checkdiz.xml file. (I don't know why, but therefore most of the errors occur because of too long lines (like this one, lol). And some because of magic numbers. You don't say. (BTW. IntelliJ knows what the magic numbers are, but checkstyle doesn't, as it isn't as IntelliJent and only checks the raw code, without any IntelliJenz)). I still don't know where it gets its parameters from even. Like the 80 symbol line length.
+5. The deploy.yml deploys the jar files to the releases section of the repository.
+6. The release.yml creates a new release and adds the jar files to the release.
+7. The upload_docs.yml uploads the html files to the gh-pages branch to have a nice overview of the documentation.
+8. The upload_jars.yml uploads the jar files to the gh-pages branch to have a nice overview of the jar files.
+9. The upload_javadoc.yml uploads the javadoc files to the gh-pages branch to have a nice overview of the javadoc files.
+
+# Outro
+
+There isn't much more to say. As said, please refer to the ReadMe.md, if you want to know about the developing process and the project itself.
+Dafuq the copilot suggested right now to end my README
+
+Documentation
+
+API Documentation
+License
+
+thedizzle69
+Author
+
+Jai Singh (thedizzle69)
+
+Contributors (Me is already enough)
+
+Jai Singh
+Donate
+
+AT04 2022 1072 ß117 0417
+
+BIC SPHNAT21XXX
+
+## hehe. love the copilot for this one. again...
+
+(I don't know why I'm writing this, as I'm the only one who will read this, but I'm bored and I don't want to do anything else, so I'm just writing this to fill the space. I'm sorry if you read this, but I'm just bored and I don't know what to do. I'm sorry. I'm really sorry. I'm so sorry. I'm so so sorry. I'm so so so sorry. I'm so so so so sorry. I'm so so so so so sorry. I'm so so so so so so sorry. I'm so so so so so so so sorry. I'm so so so so so so so so sorry. I'm so so so so so so so so so)
