@@ -82,3 +82,30 @@ The ServerApp will take the connection by the Client and when it gets sent a con
 You can now click on the desired content and press the button "Display Chosen Content" and it will open a new window displaying the chosen content.
 
 # This is about it. Have fun using the app.
+
+# Outro
+
+There isn't much more to say. As said, please refer to the ReadMe.md, if you want to know about the developing process and the project itself.
+Dafuq the copilot suggested right now to end my README
+Documentation
+
+API Documentation
+License
+
+thedizzle69
+Author
+
+Jai Singh (thedizzle69)
+
+Contributors (Me is already enough)
+
+Jai Singh
+Donate
+
+AT04 2022 1072 ß117 0417
+
+BIC SPHNAT21XXX
+
+## hehe. love the copilot for this one.
+
+(I don't know why I'm writing this, as I'm the only one who will read this, but I'm bored and I don't want to do anything else, so I'm just writing this to fill the space. I'm sorry if you read this, but I'm just bored and I don't know what to do. I'm sorry. I'm really sorry. I'm so sorry. I'm so so sorry. I'm so so so sorry. I'm so so so so sorry. I'm so so so so so sorry. I'm so so so so so so sorry. I'm so so so so so so so sorry. I'm so so so so so so so so sorry. I'm so so so so so so so so so)
